@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FopexModelStoreContainer" CdmEntityContainer="FopexEntities">
+    <EntitySetMapping Name="PettyCashForms">
+      <EntityTypeMapping TypeName="FopexModel.PettyCashForm">
+        <MappingFragment StoreEntitySet="PettyCashForm">
+          <ScalarProperty Name="PettyCashID" ColumnName="PettyCashID" />
+          <ScalarProperty Name="CashierName" ColumnName="CashierName" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="CashType" ColumnName="CashType" />
+          <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+          <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+          <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="PhysicalCashinHand" ColumnName="PhysicalCashinHand" />
+          <ScalarProperty Name="CashDifference" ColumnName="CashDifference" />
+          <ScalarProperty Name="GLAccountID" ColumnName="GLAccountID" />
+          <ScalarProperty Name="IOU" ColumnName="IOU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Branches">
+      <EntityTypeMapping TypeName="FopexModel.Branch">
+        <MappingFragment StoreEntitySet="Branch">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="Branch_Code" ColumnName="Branch_Code" />
+          <ScalarProperty Name="Branch_Name" ColumnName="Branch_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Business_Units">
+      <EntityTypeMapping TypeName="FopexModel.Business_Units">
+        <MappingFragment StoreEntitySet="Business_Units">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Business_Unit_Code" ColumnName="Business_Unit_Code" />
+          <ScalarProperty Name="Business_Unit_Description" ColumnName="Business_Unit_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionTypes">
+      <EntityTypeMapping TypeName="FopexModel.TransactionType">
+        <MappingFragment StoreEntitySet="TransactionType">
+          <ScalarProperty Name="TransTypeID" ColumnName="TransTypeID" />
+          <ScalarProperty Name="TransTypeCode" ColumnName="TransTypeCode" />
+          <ScalarProperty Name="TransTypeDescription" ColumnName="TransTypeDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="FopexModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustID" ColumnName="CustID" />
+          <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+          <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+          <ScalarProperty Name="AddessLine1" ColumnName="AddessLine1" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Contact_Person_Name" ColumnName="Contact_Person_Name" />
+          <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Customer_TypeID" ColumnName="Customer_TypeID" />
+          <ScalarProperty Name="IC_Partner_Code_ID" ColumnName="IC_Partner_Code_ID" />
+          <ScalarProperty Name="Salesperson_ID" ColumnName="Salesperson_ID" />
+          <ScalarProperty Name="Invoicing_Currency" ColumnName="Invoicing_Currency" />
+          <ScalarProperty Name="VAT_Registration_No" ColumnName="VAT_Registration_No" />
+          <ScalarProperty Name="EORI_Number" ColumnName="EORI_Number" />
+          <ScalarProperty Name="GLN" ColumnName="GLN" />
+          <ScalarProperty Name="Bill_To_Customer_Name" ColumnName="Bill_To_Customer_Name" />
+          <ScalarProperty Name="Payment_Term" ColumnName="Payment_Term" />
+          <ScalarProperty Name="Payment_Method" ColumnName="Payment_Method" />
+          <ScalarProperty Name="Exclude_From_Aging_Report" ColumnName="Exclude_From_Aging_Report" />
+          <ScalarProperty Name="Primary_Shipment_To_Location" ColumnName="Primary_Shipment_To_Location" />
+          <ScalarProperty Name="Secondary_Shipment_To_Location" ColumnName="Secondary_Shipment_To_Location" />
+          <ScalarProperty Name="Primary_Shipment_From_Location" ColumnName="Primary_Shipment_From_Location" />
+          <ScalarProperty Name="Secondary_Shipment_From_Location" ColumnName="Secondary_Shipment_From_Location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customer_Type">
+      <EntityTypeMapping TypeName="FopexModel.Customer_Type">
+        <MappingFragment StoreEntitySet="Customer_Type">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Customer_Type1" ColumnName="Customer_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="FopexModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="City_Name" ColumnName="City_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="FopexModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Country_Name" ColumnName="Country_Name" />
+          <ScalarProperty Name="Country_Code" ColumnName="Country_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="FopexModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Country1">
+      <EntityTypeMapping TypeName="FopexModel.Country1">
+        <MappingFragment StoreEntitySet="Country1">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Country_Code" ColumnName="Country_Code" />
+          <ScalarProperty Name="Country_Name" ColumnName="Country_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GL_Main_Category">
+      <EntityTypeMapping TypeName="FopexModel.GL_Main_Category">
+        <MappingFragment StoreEntitySet="GL_Main_Category">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Main_GL_Code" ColumnName="Main_GL_Code" />
+          <ScalarProperty Name="Main_GL_Description" ColumnName="Main_GL_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LedgerTransactions">
+      <EntityTypeMapping TypeName="FopexModel.LedgerTransaction">
+        <MappingFragment StoreEntitySet="LedgerTransactions">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Transaction_ID" ColumnName="Transaction_ID" />
+          <ScalarProperty Name="Transaction_Type" ColumnName="Transaction_Type" />
+          <ScalarProperty Name="Period" ColumnName="Period" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CostCenter" ColumnName="CostCenter" />
+          <ScalarProperty Name="Code_Level1" ColumnName="Code_Level1" />
+          <ScalarProperty Name="Code_Level2" ColumnName="Code_Level2" />
+          <ScalarProperty Name="Code_Level3" ColumnName="Code_Level3" />
+          <ScalarProperty Name="AmountDebit" ColumnName="AmountDebit" />
+          <ScalarProperty Name="AmountCredit" ColumnName="AmountCredit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="FopexModel.Item">
+        <MappingFragment StoreEntitySet="Item">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Item_No" ColumnName="Item_No" />
+          <ScalarProperty Name="item_Description" ColumnName="item_Description" />
+          <ScalarProperty Name="UOM_ID" ColumnName="UOM_ID" />
+          <ScalarProperty Name="Item_Type_ID" ColumnName="Item_Type_ID" />
+          <ScalarProperty Name="Purch_UOM_ID" ColumnName="Purch_UOM_ID" />
+          <ScalarProperty Name="Sale_UOM_ID" ColumnName="Sale_UOM_ID" />
+          <ScalarProperty Name="Prod_UOM_ID" ColumnName="Prod_UOM_ID" />
+          <ScalarProperty Name="Qty_Purch_Ord_ID" ColumnName="Qty_Purch_Ord_ID" />
+          <ScalarProperty Name="Qty_Sale_Ord_ID" ColumnName="Qty_Sale_Ord_ID" />
+          <ScalarProperty Name="Qty_Prod_Ord_ID" ColumnName="Qty_Prod_Ord_ID" />
+          <ScalarProperty Name="Qty_BOM_ID" ColumnName="Qty_BOM_ID" />
+          <ScalarProperty Name="Qty_Available" ColumnName="Qty_Available" />
+          <ScalarProperty Name="Qty_Sold" ColumnName="Qty_Sold" />
+          <ScalarProperty Name="Qty_Adj" ColumnName="Qty_Adj" />
+          <ScalarProperty Name="Business_Unit_ID" ColumnName="Business_Unit_ID" />
+          <ScalarProperty Name="Product_Line_ID" ColumnName="Product_Line_ID" />
+          <ScalarProperty Name="Product_Group_ID" ColumnName="Product_Group_ID" />
+          <ScalarProperty Name="Item_Category_ID" ColumnName="Item_Category_ID" />
+          <ScalarProperty Name="GLCodeID_Sale" ColumnName="GLCodeID_Sale" />
+          <ScalarProperty Name="GLCodeID_Inventory" ColumnName="GLCodeID_Inventory" />
+          <ScalarProperty Name="GLCodeID_CostofSale" ColumnName="GLCodeID_CostofSale" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemTypes">
+      <EntityTypeMapping TypeName="FopexModel.ItemType">
+        <MappingFragment StoreEntitySet="ItemType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Item_Type_Code" ColumnName="Item_Type_Code" />
+          <ScalarProperty Name="Item_Type_Description" ColumnName="Item_Type_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UOMs">
+      <EntityTypeMapping TypeName="FopexModel.UOM">
+        <MappingFragment StoreEntitySet="UOM">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UOM_ID" ColumnName="UOM_ID" />
+          <ScalarProperty Name="UOM_Description" ColumnName="UOM_Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SaleInvoices">
+      <EntityTypeMapping TypeName="FopexModel.SaleInvoice">
+        <MappingFragment StoreEntitySet="SaleInvoice">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Invoice_No" ColumnName="Invoice_No" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CustID" ColumnName="CustID" />
+          <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+          <ScalarProperty Name="Customer_Ref" ColumnName="Customer_Ref" />
+          <ScalarProperty Name="Item_Type" ColumnName="Item_Type" />
+          <ScalarProperty Name="Item_No" ColumnName="Item_No" />
+          <ScalarProperty Name="Item_Description" ColumnName="Item_Description" />
+          <ScalarProperty Name="Qty_Ordered" ColumnName="Qty_Ordered" />
+          <ScalarProperty Name="Qty_Shipped" ColumnName="Qty_Shipped" />
+          <ScalarProperty Name="Qty_Invoiced" ColumnName="Qty_Invoiced" />
+          <ScalarProperty Name="Qty_Balance" ColumnName="Qty_Balance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="FopexModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="FopexModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="FopexModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="FopexModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FopexModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="FopexModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FopexModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="FopexModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="FopexModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="TR_GetCountry_SP" FunctionName="FopexModel.Store.TR_GetCountry_SP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FopexModel.TR_GetCountry_SP_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Country_Name" ColumnName="Country_Name" />
+          <ScalarProperty Name="Country_Code" ColumnName="Country_Code" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

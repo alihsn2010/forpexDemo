@@ -1,0 +1,36 @@
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.BAL.dll
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.BAL.pdb
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.DAL.dll
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Newtonsoft.Json.dll
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Tracer.dll
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Cryptography.dll
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.Common.dll
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.DAL.pdb
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Newtonsoft.Json.xml
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.Common.pdb
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\obj\Debug\Fopex.BAL.csprojAssemblyReference.cache
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\obj\Debug\Fopex.BAL.csproj.CoreCompileInputs.cache
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\obj\Debug\Fopex.BAL.csproj.CopyComplete
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\obj\Debug\Fopex.BAL.dll
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\obj\Debug\Fopex.BAL.pdb
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.DAL.dll.config
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\EntityFramework.dll
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\EntityFramework.xml
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.BAL.dll
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.BAL.pdb
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.DAL.dll
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Newtonsoft.Json.dll
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Tracer.dll
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\EntityFramework.dll
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Cryptography.dll
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.Common.dll
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.DAL.pdb
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.DAL.dll.config
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Newtonsoft.Json.xml
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\EntityFramework.xml
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\bin\Debug\Fopex.Common.pdb
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\obj\Debug\Fopex.BAL.csprojAssemblyReference.cache
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\obj\Debug\Fopex.BAL.csproj.CoreCompileInputs.cache
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\obj\Debug\Fopex.BAL.csproj.CopyComplete
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\obj\Debug\Fopex.BAL.dll
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.BAL\obj\Debug\Fopex.BAL.pdb

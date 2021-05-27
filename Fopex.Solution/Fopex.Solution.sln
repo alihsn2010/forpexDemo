@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fopex.Online", "Fopex.Online\Fopex.Online.csproj", "{F73FB29E-3974-4B1F-B9A5-204EA745009B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{63B14046-A839-4B26-ACDD-4BB78CB1E2C2} = {63B14046-A839-4B26-ACDD-4BB78CB1E2C2}
+		{0704537E-1729-4CF6-8662-81FF9201A155} = {0704537E-1729-4CF6-8662-81FF9201A155}
+		{139F27A3-98E6-419F-B5A5-57C55BE24969} = {139F27A3-98E6-419F-B5A5-57C55BE24969}
+		{B15A03CE-76BE-4B2E-8556-27DF75D1B9A1} = {B15A03CE-76BE-4B2E-8556-27DF75D1B9A1}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fopex.BAL", "Fopex.BAL\Fopex.BAL.csproj", "{139F27A3-98E6-419F-B5A5-57C55BE24969}"
+	ProjectSection(ProjectDependencies) = postProject
+		{63B14046-A839-4B26-ACDD-4BB78CB1E2C2} = {63B14046-A839-4B26-ACDD-4BB78CB1E2C2}
+		{B15A03CE-76BE-4B2E-8556-27DF75D1B9A1} = {B15A03CE-76BE-4B2E-8556-27DF75D1B9A1}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fopex.DAL", "Fopex.DAL\Fopex.DAL.csproj", "{B15A03CE-76BE-4B2E-8556-27DF75D1B9A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fopex.Common", "Fopex.Common\Fopex.Common.csproj", "{63B14046-A839-4B26-ACDD-4BB78CB1E2C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fopex.Services", "Fopex.Services\Fopex.Services.csproj", "{0704537E-1729-4CF6-8662-81FF9201A155}"
+	ProjectSection(ProjectDependencies) = postProject
+		{63B14046-A839-4B26-ACDD-4BB78CB1E2C2} = {63B14046-A839-4B26-ACDD-4BB78CB1E2C2}
+		{139F27A3-98E6-419F-B5A5-57C55BE24969} = {139F27A3-98E6-419F-B5A5-57C55BE24969}
+		{B15A03CE-76BE-4B2E-8556-27DF75D1B9A1} = {B15A03CE-76BE-4B2E-8556-27DF75D1B9A1}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F73FB29E-3974-4B1F-B9A5-204EA745009B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F73FB29E-3974-4B1F-B9A5-204EA745009B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F73FB29E-3974-4B1F-B9A5-204EA745009B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F73FB29E-3974-4B1F-B9A5-204EA745009B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{139F27A3-98E6-419F-B5A5-57C55BE24969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{139F27A3-98E6-419F-B5A5-57C55BE24969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{139F27A3-98E6-419F-B5A5-57C55BE24969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{139F27A3-98E6-419F-B5A5-57C55BE24969}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B15A03CE-76BE-4B2E-8556-27DF75D1B9A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B15A03CE-76BE-4B2E-8556-27DF75D1B9A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B15A03CE-76BE-4B2E-8556-27DF75D1B9A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B15A03CE-76BE-4B2E-8556-27DF75D1B9A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63B14046-A839-4B26-ACDD-4BB78CB1E2C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63B14046-A839-4B26-ACDD-4BB78CB1E2C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63B14046-A839-4B26-ACDD-4BB78CB1E2C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63B14046-A839-4B26-ACDD-4BB78CB1E2C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0704537E-1729-4CF6-8662-81FF9201A155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0704537E-1729-4CF6-8662-81FF9201A155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0704537E-1729-4CF6-8662-81FF9201A155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0704537E-1729-4CF6-8662-81FF9201A155}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {897E26BE-A1B7-4335-9BE4-C3255AED99BD}
+	EndGlobalSection
+EndGlobal

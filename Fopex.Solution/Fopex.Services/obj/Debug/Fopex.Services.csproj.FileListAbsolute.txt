@@ -1,0 +1,10 @@
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.Services\bin\Debug\Fopex.Services.dll
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.Services\bin\Debug\Fopex.Services.pdb
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.Services\obj\Debug\Fopex.Services.csproj.CoreCompileInputs.cache
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.Services\obj\Debug\Fopex.Services.dll
+D:\DevOps Project\FopexSolution\Fopex.Solution\Fopex.Services\obj\Debug\Fopex.Services.pdb
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Services\bin\Debug\Fopex.Services.dll
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Services\bin\Debug\Fopex.Services.pdb
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Services\obj\Debug\Fopex.Services.csproj.CoreCompileInputs.cache
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Services\obj\Debug\Fopex.Services.dll
+D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Services\obj\Debug\Fopex.Services.pdb

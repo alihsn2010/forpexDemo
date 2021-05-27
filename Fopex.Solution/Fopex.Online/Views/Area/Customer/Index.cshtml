@@ -1,0 +1,160 @@
+﻿@model IEnumerable<Fopex.Online.Models.Area.Customer.PageCustomers>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="card text-center justify-content-center shadow-lg p-0 bg-light rounded position-static">
+    <div class="row">
+        <div class="card-header col-lg-5">
+            
+        </div>
+
+        <div class="card-header col-lg-3">
+            <ul class="nav nav-pills">
+                <li>
+                    <h2 class="text-center"><span class="badge badge-default">List of Customers</span></h2>
+                </li>
+            </ul>
+
+        </div>
+        <div class="card-header col-lg-4 text-right">
+
+            
+            <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Create","Customer")'">New Customer</button>
+            
+            
+        </div>
+
+    </div>
+</div>
+
+@* END OF PAGE HEADER *@
+
+@*<table id="myTable" class="display">
+        <thead>
+            <tr>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Email ID
+                </th>
+            </tr>
+        </thead>
+        <tr>
+            <td>
+                Bukhtiar
+            </td>
+            <td>
+                Awan
+            </td>
+            <td>
+                bukhtiar@hotmail.com
+            </td>
+        </tr>
+    </table>*@
+
+<!--<div class="container">-->
+@*<div class="card-header">
+        <h2>Customer Balances</h2>
+
+        <p>
+            <a class="btn btn-primary" @Html.ActionLink("Create New Customer", "Create")</a>
+    </div>*@
+
+<table id="myTable" class="table table-bordered table-hover shadow-lg">
+    <thead class="bg-light">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer_Name)
+            </th>
+
+            <th>Balance</th>
+            <th align="right">Action</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer_Name)
+            </td>
+
+            <td>
+                <input class="custom-control-input" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit Customer", "Edit", new { id = item.Customer_ID }) |
+                @Html.ActionLink("Customer Details", "Details", new { id = item.Customer_ID }) |
+                @Html.ActionLink("Delete Customer", "Delete", new { id = item.Customer_ID })
+               
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+@*CSS for Bootstrap 4 styling from DataTable*@
+<link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
+
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+    @*JS Bootstrap 4 styling from DataTable*@
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
+
+
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+
+                "ajax": {
+                    "url": "/Customer/Index",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "A" },
+                    { "data": "B)" },
+                    { "data": "Balance" },
+                    { "data": "Action" }
+                ]
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+
+        var test = prompt("Enter your name", "");
+        document.write("Hello" + test);
+            
+        
+
+        
+
+    </script>*@
+
+    @*<form>
+        <a class="btn btn-primary" onclick="test()"></a>
+    </form>*@
+
+}
+
+
+

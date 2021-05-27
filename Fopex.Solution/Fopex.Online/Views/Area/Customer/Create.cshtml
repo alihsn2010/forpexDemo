@@ -1,0 +1,593 @@
+﻿@model Fopex.Online.Models.Area.Customer.PageCustomers
+
+
+@{
+    ViewBag.Title = "Create Customer";
+}
+
+@using (Html.BeginForm())
+
+{
+    @Html.AntiForgeryToken()
+
+
+
+
+    //________________________________________________________________________
+    <div class="card text-center justify-content-center bg-light colored-shadow">
+        <div class="row">
+            <div class="card-header col-lg-7">
+                <ul class="nav nav-pills" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" role="tab" aria-controls="general">General</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="customersetup-tab" data-bs-toggle="tab" data-bs-target="#customersetup" role="tab" aria-controls="customersetup">Customer Setup</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="InvoiceAndPayment-tab" data-bs-toggle="tab" data-bs-target="#InvoiceAndPayment" role="tab" aria-controls="InvoiceAndPayment">Invoicing & Payments</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="shipment-tab" data-bs-toggle="tab" data-bs-target="#shipment" role="tab" aria-controls="shipment">Shipment</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="accountsetup-tab" data-bs-toggle="tab" data-bs-target="#accountsetup" role="tab" aria-controls="accountsetup" aria-selected="false">Accounting Setup</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="salesteamsetup-tab" data-bs-toggle="tab" data-bs-target="#salesteamsetup" role="tab" aria-controls="salesteamsetup" aria-selected="false">Sales Team Setup</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card-header col-lg-2">
+                <ul class="nav nav-pills">
+                    <li>
+                        <h2 class="text-center"><span class="badge badge-default">New Customer Card</span></h2>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="card-header col-lg-3 text-right">
+                <button type="submit" class="btn btn-secondary btn-md" runat="server">Save</button>
+                <button class="btn btn-secondary btn-md" @Html.ActionLink("Cancel", "Index")></button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header card-header-primary">
+            <div class="card">
+                <div class="card-header alert-danger p-0 font-weight-bold">Alert Settings</div>
+                <div class="card-body alert-danger pb-0">
+                    <label>Block Customer</label>
+                    <input type="checkbox" />
+                    <label>Privacy Blocked</label>
+                    <input type="checkbox" />
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.ValidationSummary(true, "Fix the Error", new { @class = "text-danger" })
+
+<div class="tab-content" id="myTabContent">
+    
+
+        <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Customer_ID)
+
+                            @Html.EditorFor(model => model.Customer_ID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Customer_ID, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Customer_Name)
+
+                            @Html.EditorFor(model => model.Customer_Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Customer_Name, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Contact_Person_Name)
+                            <div>
+                                @Html.EditorFor(model => model.Contact_Person_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Contact_Person_Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Phone_No)
+                            <div>
+                                @Html.EditorFor(model => model.Phone_No, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phone_No, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col-2">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email)
+                            <div>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-5">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AddessLine1)
+                            <div>
+                                @Html.EditorFor(model => model.AddessLine1, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AddessLine1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AddressLine2)
+                            <div>
+                                @Html.EditorFor(model => model.AddressLine2, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AddressLine2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+
+                    <div class="col-3">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Country)
+                            <div>
+
+                                @Html.DropDownListFor(p => Model.Country, (IEnumerable<SelectListItem>)ViewBag.vbcountry, new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.City)
+                            <div>
+                                @Html.DropDownListFor(p => Model.City, (IEnumerable<SelectListItem>)ViewBag.vbcity, new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.State)
+                            <div>
+                                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Region)
+                            <div>
+                                @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                      
+
+
+
+                    </div>
+                </div>
+
+                <div class="row">
+                  
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Additional_Notes)
+                                <div>
+                                    @Html.EditorFor(model => model.Additional_Notes, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Additional_Notes, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                   
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    
+
+
+    <div class="tab-pane fade" id="customersetup" role="tabpanel" aria-labelledby="customersetup-tab">
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-3">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Customer_TypeID)
+                        <div>
+                            @Html.DropDownListFor(p => Model.Customer_TypeID, (IEnumerable<SelectListItem>)ViewBag.MySkills, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Customer_TypeID, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Customer_GroupID)
+                        <div>
+                            @Html.EditorFor(model => model.Customer_GroupID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Customer_GroupID, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Customer_Sales_Type_ID)
+                        <div>
+                            @Html.EditorFor(model => model.Customer_Sales_Type_ID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Customer_Sales_Type_ID, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Payment_Type_Group_ID)
+                        <div>
+                            @Html.EditorFor(model => model.Payment_Type_Group_ID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Payment_Type_Group_ID, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Sales_Region)
+                        <div>
+                            @Html.EditorFor(model => model.Sales_Region, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Sales_Region, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.VAT_Registration_No)
+                        <div>
+                            @Html.EditorFor(model => model.VAT_Registration_No, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.VAT_Registration_No, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EORI_Number)
+                        <div>
+                            @Html.EditorFor(model => model.EORI_Number, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EORI_Number, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GLN)
+                        <div>
+                            @Html.EditorFor(model => model.GLN, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GLN, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+
+
+
+
+    <div class="tab-pane fade" id="InvoiceAndPayment" role="tabpanel" aria-labelledby="InvoiceAndPayment-tab">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-4">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Bill_To_Customer_Name)
+                        <div>
+                            @Html.EditorFor(model => model.Bill_To_Customer_Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Bill_To_Customer_Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Invoicing_Currency)
+                        <div>
+                            @Html.EditorFor(model => model.Invoicing_Currency, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Invoicing_Currency, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="col-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Payment_Term)
+                        <div>
+                            @Html.EditorFor(model => model.Payment_Term, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Payment_Term, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+           
+                <div class="row">
+
+                    <div class="col-4">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Payment_Method)
+                            <div>
+                                @Html.EditorFor(model => model.Payment_Method, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Payment_Method, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Exclude_From_Aging_Report)
+                            <div>
+                                @Html.EditorFor(model => model.Exclude_From_Aging_Report, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Exclude_From_Aging_Report, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            
+        </div>
+        </div>
+
+        <div class="tab-pane fade" id="shipment" role="tabpanel" aria-labelledby="shipment-tab">
+
+            <div class="container shadow-lg p-0 bg-light rounded">
+                <div class="card-group">
+
+                    <div class="card" style="width: 10rem;">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                Shipment To:
+                            </h6>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Primary_Shipment_To_Location)
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Primary_Shipment_To_Location, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Primary_Shipment_To_Location, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Secondary_Shipment_To_Location)
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Secondary_Shipment_To_Location, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Secondary_Shipment_To_Location, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    second card
+
+                    <div class="card" style="width: 10rem;">
+
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                Shipment From:
+                            </h6>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Primary_Shipment_From_Location)
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Primary_Shipment_From_Location, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Primary_Shipment_From_Location, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Secondary_Shipment_From_Location)
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Secondary_Shipment_From_Location, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Secondary_Shipment_From_Location, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tab-pane fade" id="accountsetup" role="tabpanel" aria-labelledby="accountsetup-tab">
+
+            <div class="container shadow-lg p-0 bg-light rounded">
+                <div class="card-group">
+
+                    <div class="card" style="width: 10rem;">
+                        <div class="card-body">
+                            @*<h6 class="card-title">
+                                Shipment To:
+                            </h6>*@
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Primary_Shipment_To_Location)
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Primary_Shipment_To_Location, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Primary_Shipment_To_Location, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Secondary_Shipment_To_Location)
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Secondary_Shipment_To_Location, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Secondary_Shipment_To_Location, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*second card*@
+
+                    <div class="card" style="width: 10rem;">
+
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                Shipment From:
+                            </h6>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Primary_Shipment_From_Location)
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Primary_Shipment_From_Location, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Primary_Shipment_From_Location, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Secondary_Shipment_From_Location)
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Secondary_Shipment_From_Location, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Secondary_Shipment_From_Location, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    
+        <div class="tab-pane fade" id="salesteamsetup" role="tabpanel" aria-labelledby="salesteamsetup-tab">
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Assigned_SupervisorID)
+                            <div>
+                                @Html.EditorFor(model => model.Assigned_SupervisorID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Assigned_SupervisorID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Assigned_SalespersonID)
+                            <div>
+                                @Html.EditorFor(model => model.Assigned_SalespersonID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Assigned_SalespersonID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+                </div>
+
+
+
+
+
+                }
+
+
+                @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+            <script src="~/Scripts/jquery.validate.min.js"></script>
+            <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
