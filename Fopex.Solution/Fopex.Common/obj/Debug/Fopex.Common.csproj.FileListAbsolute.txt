@@ -17,3 +17,12 @@ D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Common\o
 D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Common\obj\Debug\Fopex.Common.csproj.CopyComplete
 D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Common\obj\Debug\Fopex.Common.dll
 D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Common\obj\Debug\Fopex.Common.pdb
+D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Common\bin\Debug\Fopex.Common.dll
+D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Common\bin\Debug\Fopex.Common.pdb
+D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Common\bin\Debug\Newtonsoft.Json.dll
+D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Common\bin\Debug\Tracer.dll
+D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Common\bin\Debug\Newtonsoft.Json.xml
+D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Common\obj\Debug\Fopex.Common.csproj.CoreCompileInputs.cache
+D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Common\obj\Debug\Fopex.Common.csproj.CopyComplete
+D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Common\obj\Debug\Fopex.Common.dll
+D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Common\obj\Debug\Fopex.Common.pdb

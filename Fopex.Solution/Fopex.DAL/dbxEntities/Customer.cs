@@ -17,19 +17,21 @@ namespace Fopex.DAL.dbxEntities
         public int CustID { get; set; }
         public string Customer_ID { get; set; }
         public string Customer_Name { get; set; }
-        public string AddessLine1 { get; set; }
-        public string AddressLine2 { get; set; }
-        public int City { get; set; }
-        public string State { get; set; }
-        public string Province { get; set; }
-        public string Region { get; set; }
-        public int Country { get; set; }
         public string Contact_Person_Name { get; set; }
         public string Phone_No { get; set; }
         public string Email { get; set; }
+        public string AddessLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public Nullable<int> Country { get; set; }
+        public Nullable<int> City { get; set; }
+        public string State { get; set; }
+        public string Region { get; set; }
+        public string Additional_Notes { get; set; }
         public string Customer_TypeID { get; set; }
-        public string IC_Partner_Code_ID { get; set; }
-        public string Salesperson_ID { get; set; }
+        public Nullable<int> Customer_GroupID { get; set; }
+        public Nullable<int> Customer_Sales_Type_ID { get; set; }
+        public Nullable<int> Payment_Type_Group_ID { get; set; }
+        public Nullable<int> Sales_Region { get; set; }
         public string Invoicing_Currency { get; set; }
         public string VAT_Registration_No { get; set; }
         public string EORI_Number { get; set; }
@@ -42,8 +44,9 @@ namespace Fopex.DAL.dbxEntities
         public string Secondary_Shipment_To_Location { get; set; }
         public string Primary_Shipment_From_Location { get; set; }
         public string Secondary_Shipment_From_Location { get; set; }
+        public Nullable<int> Assigned_SupervisorID { get; set; }
+        public Nullable<int> Assigned_SalespersonID { get; set; }
     
         public virtual City City1 { get; set; }
-        public virtual Country Country1 { get; set; }
     }
 }

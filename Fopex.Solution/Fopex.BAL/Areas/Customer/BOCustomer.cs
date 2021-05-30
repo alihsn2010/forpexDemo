@@ -1,6 +1,10 @@
-﻿using Fopex.DAL.Areas.Customer;
+﻿using Fopex.DAL.Areas.City;
+using Fopex.DAL.Areas.Customer;
+using Fopex.DAL.Areas.Region;
 using Fopex.DAL.Model.City;
+using Fopex.DAL.Model.Country;
 using Fopex.DAL.Model.Customer;
+using Fopex.DAL.Model.Region;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,6 +18,36 @@ namespace Fopex.BAL.Areas.Customer
     {
         #region bind Dropdownlist
 
+       public List<mCity> ddlGetCity()
+        {
+
+            DOCity objCity = new DOCity();
+            var result = objCity.GetAllActive();
+           
+            return result; 
+           
+        }
+
+        public List<mCountry> ddlGetCountry()
+        {
+
+            Fopex.DAL.Areas.Country.DOCountry objDOCountry = new DAL.Areas.Country.DOCountry();
+            var result = objDOCountry.GetAllActive();
+
+            return result;
+
+        }
+
+
+        public List<mRegion> ddlGetRegion()
+        {
+
+            DORegion objDORegion = new DORegion();
+            var result = objDORegion.GetAllActive();
+
+            return result;
+
+        }
 
 
 
@@ -79,23 +113,28 @@ namespace Fopex.BAL.Areas.Customer
         #region  Add
 
 
-        public mCustomer BOAddNewCustomer(mCustomer objCust)
+        public Int64 BOAddNewCustomer(mCustomer objCust)
         {
             try
             {
+                Int64 result = 0;
 
                 mCustomer objModelCustomer = new mCustomer();
                 DOCustomer doCustomer = new DOCustomer();
-                objModelCustomer = doCustomer.AddNewCustomer(objCust);
-                if (objModelCustomer.CustID > 0)
+                if (objCust != null )
+                {
+                    result = doCustomer.AddNewCustomer(objCust);
+                }
+                
+                if (result != null)
                 {
                     //var json = JsonConvert.SerializeObject(dtResultSet, Formatting.None);
                     //var ReturnResult = JsonConvert.DeserializeObject<List<mCity>>(json);
-                    return objModelCustomer;
+                    return result;
                 }
                 else
                 {
-                    return null;
+                    return 0;
                 }
 
 

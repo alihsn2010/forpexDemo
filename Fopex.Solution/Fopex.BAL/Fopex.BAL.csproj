@@ -51,6 +51,7 @@
     <Compile Include="Areas\City\BOCity.cs" />
     <Compile Include="Areas\Country\BOCountry.cs" />
     <Compile Include="Areas\Customer\BOCustomer.cs" />
+    <Compile Include="Areas\Region\BORegion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

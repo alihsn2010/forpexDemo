@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Fopex.DAL.Areas.Customer
 {
-    public  class DOCustomer
+    public class DOCustomer
     {
         public List<mCustomer> GetAll()
         {
@@ -25,7 +25,7 @@ namespace Fopex.DAL.Areas.Customer
                 try
                 {
                     var query = db.Customers.OrderByDescending(a => a.CustID).ToList();
-                    if (query != null)
+                    if (query.Count > 0)
                     {
                         foreach (dbxEntities.Customer cus in query)
                         {
@@ -33,7 +33,6 @@ namespace Fopex.DAL.Areas.Customer
 
                             ModelCustomer.CustID = cus.CustID;
                             ModelCustomer.City = cus.City;
-
                             ModelCustomer.AddessLine1 = cus.AddessLine1;
                             ModelCustomer.AddressLine2 = cus.AddressLine2;
                             ModelCustomer.Bill_To_Customer_Name = cus.Bill_To_Customer_Name;
@@ -69,7 +68,7 @@ namespace Fopex.DAL.Areas.Customer
                             ModelCustomer.Region = cus.Region;
                             ModelCustomer.State = cus.State;
                             ModelCustomer.VAT_Registration_No = cus.VAT_Registration_No;
-                                
+
                             CustomersList.Add(ModelCustomer);
 
                         }
@@ -87,13 +86,55 @@ namespace Fopex.DAL.Areas.Customer
         }
 
 
-        public  mCustomer AddNewCustomer(mCustomer objCustomer)
+        List<mCustomer> CusList;
+
+        public long AddNewCustomer(mCustomer objCustomer)
         {
 
+            FopexEntities1 dd = new FopexEntities1();
 
-            return null;
+
+            using (FopexEntities1 db = new FopexEntities1())
+            {
+                long flag = 0;
+
+           
+                var modelCust = new Fopex.DAL.dbxEntities.Customer();
+                try
+                {
+
+
+                   
+                    if (objCustomer != null)
+                    {
+                        modelCust.Customer_ID = objCustomer.Customer_ID;
+                        modelCust.Customer_Name = objCustomer.Customer_Name;
+                        modelCust.Email = objCustomer.Email;
+                        modelCust.Phone_No = objCustomer.Phone_No;
+                        modelCust.City = objCustomer.City;
+                        modelCust.Country = objCustomer.Country;
+                        modelCust.Region = objCustomer.Region;
+
+                        db.Customers.Add(modelCust);
+                        db.SaveChanges();
+
+                        flag = Convert.ToInt64(modelCust.CustID);
+
+
+                    }
+                }
+                catch
+                {
+
+                    flag = 0;
+                }
+                return flag;
+            }
 
         }
+
+
+
 
 
         public mCustomer UpdateCustomer(mCustomer objCustomer)

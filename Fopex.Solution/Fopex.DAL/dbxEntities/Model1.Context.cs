@@ -35,15 +35,26 @@ namespace Fopex.DAL.dbxEntities
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Customer_Type> Customer_Type { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<QuotationDetail> QuotationDetails { get; set; }
+        public DbSet<QuotationMaster> QuotationMasters { get; set; }
         public DbSet<Country> Countries { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
-        public DbSet<Country1> Country1 { get; set; }
+        public DbSet<Account_Category> Account_Category { get; set; }
+        public DbSet<Account_Classification> Account_Classification { get; set; }
+        public DbSet<Account_Head> Account_Head { get; set; }
+        public DbSet<Account_Subcategory> Account_Subcategory { get; set; }
+        public DbSet<Chart_of_Account> Chart_of_Account { get; set; }
         public DbSet<GL_Main_Category> GL_Main_Category { get; set; }
+        public DbSet<GL_Sub_Category_TO_DELETE> GL_Sub_Category_TO_DELETE { get; set; }
         public DbSet<LedgerTransaction> LedgerTransactions { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<Item_Ledger> Item_Ledger { get; set; }
         public DbSet<ItemType> ItemTypes { get; set; }
+        public DbSet<Main_Variant> Main_Variant { get; set; }
         public DbSet<UOM> UOMs { get; set; }
+        public DbSet<Variant> Variants { get; set; }
+        public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleInvoice> SaleInvoices { get; set; }
+        public DbSet<Region> Regions { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

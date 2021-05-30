@@ -16,8 +16,8 @@ namespace Fopex.DAL.dbxEntities
     {
         public int ID { get; set; }
         public string Invoice_No { get; set; }
-        public string Date { get; set; }
-        public Nullable<int> CustID { get; set; }
+        public Nullable<System.DateTime> Inv_Date { get; set; }
+        public Nullable<int> Customer_ID { get; set; }
         public string Customer_Name { get; set; }
         public string Customer_Ref { get; set; }
         public string Item_Type { get; set; }
@@ -27,5 +27,14 @@ namespace Fopex.DAL.dbxEntities
         public Nullable<int> Qty_Shipped { get; set; }
         public Nullable<int> Qty_Invoiced { get; set; }
         public Nullable<int> Qty_Balance { get; set; }
+        public Nullable<int> Payment_TermID { get; set; }
+        public string Quotation_Ref { get; set; }
+        public Nullable<System.DateTime> Delivery_Date { get; set; }
+        public Nullable<int> SalespersonID { get; set; }
+        public string Status { get; set; }
+        public Nullable<decimal> Amount_Ordered { get; set; }
+        public Nullable<decimal> Amount_Invoiced { get; set; }
+        public Nullable<int> CurrencyID { get; set; }
+        public string Type { get; set; }
     }
 }

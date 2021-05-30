@@ -51,19 +51,21 @@
     <Property Name="CustID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Customer_ID" Type="nvarchar" MaxLength="50" />
     <Property Name="Customer_Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="AddessLine1" Type="nvarchar" MaxLength="50" />
-    <Property Name="AddressLine2" Type="nvarchar" MaxLength="50" />
-    <Property Name="City" Type="int" Nullable="false" />
-    <Property Name="State" Type="nvarchar" MaxLength="50" />
-    <Property Name="Province" Type="nvarchar" MaxLength="50" />
-    <Property Name="Region" Type="nvarchar" MaxLength="50" />
-    <Property Name="Country" Type="int" Nullable="false" />
     <Property Name="Contact_Person_Name" Type="nvarchar" MaxLength="50" />
     <Property Name="Phone_No" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="AddessLine1" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddressLine2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Country" Type="int" />
+    <Property Name="City" Type="int" />
+    <Property Name="State" Type="nvarchar" MaxLength="50" />
+    <Property Name="Region" Type="nvarchar" MaxLength="50" />
+    <Property Name="Additional_Notes" Type="nvarchar(max)" />
     <Property Name="Customer_TypeID" Type="nvarchar" MaxLength="50" />
-    <Property Name="IC_Partner_Code_ID" Type="nvarchar" MaxLength="50" />
-    <Property Name="Salesperson_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="Customer_GroupID" Type="int" />
+    <Property Name="Customer_Sales_Type_ID" Type="int" />
+    <Property Name="Payment_Type_Group_ID" Type="int" />
+    <Property Name="Sales_Region" Type="int" />
     <Property Name="Invoicing_Currency" Type="nvarchar" MaxLength="50" />
     <Property Name="VAT_Registration_No" Type="nvarchar" MaxLength="50" />
     <Property Name="EORI_Number" Type="nvarchar" MaxLength="50" />
@@ -76,6 +78,8 @@
     <Property Name="Secondary_Shipment_To_Location" Type="nvarchar" MaxLength="50" />
     <Property Name="Primary_Shipment_From_Location" Type="nvarchar" MaxLength="50" />
     <Property Name="Secondary_Shipment_From_Location" Type="nvarchar" MaxLength="50" />
+    <Property Name="Assigned_SupervisorID" Type="int" />
+    <Property Name="Assigned_SalespersonID" Type="int" />
   </EntityType>
   <EntityType Name="Customer_Type">
     <Key>
@@ -91,31 +95,138 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="City_Name" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="Country">
+  <EntityType Name="QuotationDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartNo" Type="nvarchar" MaxLength="500" />
+    <Property Name="Serial_No" Type="nvarchar" MaxLength="500" />
+    <Property Name="BrandId" Type="bigint" />
+    <Property Name="BrandName" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Description" Type="varchar" MaxLength="1000" />
+    <Property Name="UOMId" Type="bigint" Nullable="false" />
+    <Property Name="UOMName" Type="nvarchar" MaxLength="500" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="GrossPrice" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="Margin" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="MarginType" Type="bigint" />
+    <Property Name="UnitPriceAfterMargin" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="GrossPriceAfterMargin" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="Discount" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="DiscountTypeId" Type="bigint" Nullable="false" />
+    <Property Name="NetAmount" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="CurrencyId" Type="bigint" Nullable="false" />
+    <Property Name="QutationId" Type="bigint" Nullable="false" />
+    <Property Name="VendorQuotationId" Type="bigint" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="Created_By" Type="bigint" />
+    <Property Name="Create_Date" Type="datetime" />
+    <Property Name="Update_Date" Type="datetime" />
+    <Property Name="DiscountedValueAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+    <Property Name="MarginValueAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuotationMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegionId" Type="bigint" Nullable="false" />
+    <Property Name="CurrencyId" Type="bigint" Nullable="false" />
+    <Property Name="QutationNo" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="QRRNo" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="CustumerId" Type="bigint" Nullable="false" />
+    <Property Name="QutationSubject" Type="nvarchar" MaxLength="2500" Nullable="false" />
+    <Property Name="QutationDate" Type="datetime" Nullable="false" />
+    <Property Name="QutationValidity" Type="datetime" Nullable="false" />
+    <Property Name="CustomrRepresentativeId" Type="int" Nullable="false" />
+    <Property Name="QutationSentByUserId" Type="bigint" Nullable="false" />
+    <Property Name="GrossTotal" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ApplicableDiscount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ImportDuties" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CustomDuties" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="QutationStatus" Type="bigint" Nullable="false" />
+    <Property Name="BarCodeId" Type="nvarchar" MaxLength="4000" />
+    <Property Name="BarCodeImageUlr" Type="nvarchar" MaxLength="200" />
+    <Property Name="PaymnetTernsAndCondition" Type="nvarchar" MaxLength="4000" />
+    <Property Name="SpecialNotes" Type="nvarchar" MaxLength="4000" />
+    <Property Name="VersionNo" Type="int" Nullable="false" />
+    <Property Name="Data" Type="nvarchar(max)" />
+    <Property Name="TermAndConditionId" Type="bigint" Nullable="false" />
+    <Property Name="VendorQutationId" Type="bigint" />
+    <Property Name="TaxId" Type="bigint" />
+    <Property Name="AddedBy" Type="bigint" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="VersionOf" Type="bigint" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="NetTotal" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="UploadedFileUrl" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Region">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Country_Name" Type="varchar" MaxLength="100" />
-    <Property Name="Country_Code" Type="varchar" MaxLength="100" />
+    <Property Name="Region_Name" Type="varchar" MaxLength="100" />
+    <Property Name="Region_Code" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="int" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
-  <EntityType Name="Country1">
+  <EntityType Name="Country">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Country_Code" Type="nvarchar" MaxLength="50" />
     <Property Name="Country_Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Account_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Account_Category_Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Account_Classification">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Account_Classification_Code" Type="int" />
+    <Property Name="Account_Classification_Description" Type="nvarchar" MaxLength="51" />
+    <Property Name="Account_SubcategoryID" Type="int" />
+  </EntityType>
+  <EntityType Name="Account_Head">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Account_Head_Code" Type="int" />
+    <Property Name="Account_Head_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Account_SubclassificationID" Type="int" />
+  </EntityType>
+  <EntityType Name="Account_Subcategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Account_Subcategory_Code" Type="int" />
+    <Property Name="Account_Subcategory_Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="Account_CategoryID" Type="int" />
+  </EntityType>
+  <EntityType Name="Chart_of_Account">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Account_CategoryID" Type="int" />
+    <Property Name="Account_SubcategoryID" Type="int" />
+    <Property Name="Account_ClassificationID" Type="int" />
+    <Property Name="Account_SubclassificationID" Type="int" />
+    <Property Name="Account_Code" Type="int" />
+    <Property Name="Account_Head_Description" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="GL_Main_Category">
     <Key>
@@ -124,6 +235,14 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Main_GL_Code" Type="int" />
     <Property Name="Main_GL_Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="GL_Sub_Category TO DELETE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GL_Sub_Category_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="GL_Sub_Category_Description" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="LedgerTransactions">
     <Key>
@@ -148,8 +267,12 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Item_No" Type="nvarchar" MaxLength="10" />
     <Property Name="item_Description" Type="nvarchar" MaxLength="50" />
-    <Property Name="UOM_ID" Type="nchar" MaxLength="10" />
-    <Property Name="Item_Type_ID" Type="nchar" MaxLength="10" />
+    <Property Name="Item_Type_ID" Type="int" />
+    <Property Name="UOM_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="Business_Unit_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="Product_Line_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="Product_Group_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="Item_Category_ID" Type="nvarchar" MaxLength="50" />
     <Property Name="Purch_UOM_ID" Type="nvarchar" MaxLength="50" />
     <Property Name="Sale_UOM_ID" Type="nvarchar" MaxLength="50" />
     <Property Name="Prod_UOM_ID" Type="int" />
@@ -160,13 +283,19 @@
     <Property Name="Qty_Available" Type="int" />
     <Property Name="Qty_Sold" Type="int" />
     <Property Name="Qty_Adj" Type="int" />
-    <Property Name="Business_Unit_ID" Type="nchar" MaxLength="10" />
-    <Property Name="Product_Line_ID" Type="nchar" MaxLength="10" />
-    <Property Name="Product_Group_ID" Type="nchar" MaxLength="10" />
-    <Property Name="Item_Category_ID" Type="nchar" MaxLength="10" />
     <Property Name="GLCodeID_Sale" Type="nvarchar" MaxLength="50" />
     <Property Name="GLCodeID_Inventory" Type="nvarchar" MaxLength="50" />
     <Property Name="GLCodeID_CostofSale" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Item_Ledger">
+    <Key>
+      <PropertyRef Name="Transaction_No" />
+    </Key>
+    <Property Name="Transaction_No" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Transaction_Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Item_No" Type="nvarchar" MaxLength="50" />
+    <Property Name="Quantity" Type="int" />
   </EntityType>
   <EntityType Name="ItemType">
     <Key>
@@ -176,6 +305,13 @@
     <Property Name="Item_Type_Code" Type="nvarchar" MaxLength="50" />
     <Property Name="Item_Type_Description" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Main_Variant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Variant_Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="UOM">
     <Key>
       <PropertyRef Name="ID" />
@@ -184,26 +320,37 @@
     <Property Name="UOM_ID" Type="nvarchar" MaxLength="50" />
     <Property Name="UOM_Description" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Sale">
-          <Property Name="Sale_qty" Type="int" />
-          <Property Name="Sale_Amount" Type="money" />
-          <Property Name="Customer_Name" Type="nchar" MaxLength="10" />
-          <Property Name="Invoice_No" Type="nchar" MaxLength="10" />
-          <Property Name="Item_No" Type="nchar" MaxLength="10" />
-          <Property Name="Item_Description" Type="nchar" MaxLength="10" />
-          <Property Name="CreditSale_qty" Type="int" />
-          <Property Name="CreditSale_Amount" Type="money" />
-        </EntityType>-->
+  <EntityType Name="Variants">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Varian_Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Invoice_No" Type="nchar" MaxLength="10" />
+    <Property Name="Customer_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Customer_Ref" Type="nvarchar" MaxLength="50" />
+    <Property Name="Item_TypeID" Type="int" />
+    <Property Name="Item_No" Type="nchar" MaxLength="10" />
+    <Property Name="Item_Description" Type="nchar" MaxLength="10" />
+    <Property Name="Qty_Ordered" Type="int" />
+    <Property Name="Qty_Shipped" Type="int" />
+    <Property Name="Qty_Invoiced" Type="int" />
+    <Property Name="Qty_Balance" Type="int" />
+  </EntityType>
   <EntityType Name="SaleInvoice">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Invoice_No" Type="nchar" MaxLength="10" />
-    <Property Name="Date" Type="nvarchar" MaxLength="50" />
-    <Property Name="CustID" Type="int" />
+    <Property Name="Inv_Date" Type="date" />
+    <Property Name="Customer_ID" Type="int" />
     <Property Name="Customer_Name" Type="nchar" MaxLength="10" />
     <Property Name="Customer_Ref" Type="nchar" MaxLength="10" />
     <Property Name="Item_Type" Type="nchar" MaxLength="10" />
@@ -213,9 +360,30 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
     <Property Name="Qty_Shipped" Type="int" />
     <Property Name="Qty_Invoiced" Type="int" />
     <Property Name="Qty_Balance" Type="int" />
+    <Property Name="Payment_TermID" Type="int" />
+    <Property Name="Quotation_Ref" Type="nchar" MaxLength="10" />
+    <Property Name="Delivery_Date" Type="date" />
+    <Property Name="SalespersonID" Type="int" />
+    <Property Name="Status" Type="nchar" MaxLength="10" />
+    <Property Name="Amount_Ordered" Type="money" />
+    <Property Name="Amount_Invoiced" Type="money" />
+    <Property Name="CurrencyID" Type="int" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <Association Name="FK_Account_Subcategory_Account_Category">
+    <End Role="Account_Category" Type="Self.Account_Category" Multiplicity="0..1" />
+    <End Role="Account_Subcategory" Type="Self.Account_Subcategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account_Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Account_Subcategory">
+        <PropertyRef Name="Account_CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Customer_City">
-    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
     <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="City">
@@ -223,18 +391,6 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
       </Principal>
       <Dependent Role="Customer">
         <PropertyRef Name="City" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Customer_Country">
-    <End Role="Country" Type="Self.Country" Multiplicity="1" />
-    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Country">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Customer">
-        <PropertyRef Name="Country" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -250,40 +406,6 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="TR_GetCountry_SP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="CountryCode" Type="varchar" Mode="In" />
-  </Function>
   <EntityContainer Name="FopexModelStoreContainer">
     <EntitySet Name="PettyCashForm" EntityType="Self.PettyCashForm" Schema="Cash" store:Type="Tables" />
     <EntitySet Name="Branch" EntityType="Self.Branch" Schema="Company_Setup" store:Type="Tables" />
@@ -292,21 +414,32 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="Customer" store:Type="Tables" />
     <EntitySet Name="Customer_Type" EntityType="Self.Customer_Type" Schema="Customer" store:Type="Tables" />
     <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Country1" EntityType="Self.Country1" Schema="General_Setup" Table="Country" store:Type="Tables" />
+    <EntitySet Name="QuotationDetail" EntityType="Self.QuotationDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuotationMaster" EntityType="Self.QuotationMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="General_Setup" store:Type="Tables" />
+    <EntitySet Name="Account_Category" EntityType="Self.Account_Category" Schema="GL" store:Type="Tables" />
+    <EntitySet Name="Account_Classification" EntityType="Self.Account_Classification" Schema="GL" store:Type="Tables" />
+    <EntitySet Name="Account_Head" EntityType="Self.Account_Head" Schema="GL" store:Type="Tables" />
+    <EntitySet Name="Account_Subcategory" EntityType="Self.Account_Subcategory" Schema="GL" store:Type="Tables" />
+    <EntitySet Name="Chart_of_Account" EntityType="Self.Chart_of_Account" Schema="GL" store:Type="Tables" />
     <EntitySet Name="GL_Main_Category" EntityType="Self.GL_Main_Category" Schema="GL" store:Type="Tables" />
+    <EntitySet Name="GL_Sub_Category TO DELETE" EntityType="Self.GL_Sub_Category TO DELETE" Schema="GL" store:Type="Tables" />
     <EntitySet Name="LedgerTransactions" EntityType="Self.LedgerTransactions" Schema="GL" store:Type="Tables" />
     <EntitySet Name="Item" EntityType="Self.Item" Schema="Item" store:Type="Tables" />
+    <EntitySet Name="Item_Ledger" EntityType="Self.Item_Ledger" Schema="Item" store:Type="Tables" />
     <EntitySet Name="ItemType" EntityType="Self.ItemType" Schema="Item" store:Type="Tables" />
+    <EntitySet Name="Main_Variant" EntityType="Self.Main_Variant" Schema="Item" store:Type="Tables" />
     <EntitySet Name="UOM" EntityType="Self.UOM" Schema="Item" store:Type="Tables" />
+    <EntitySet Name="Variants" EntityType="Self.Variants" Schema="Item" store:Type="Tables" />
+    <EntitySet Name="Sale" EntityType="Self.Sale" Schema="Sales" store:Type="Tables" />
     <EntitySet Name="SaleInvoice" EntityType="Self.SaleInvoice" Schema="Sales" store:Type="Tables" />
+    <AssociationSet Name="FK_Account_Subcategory_Account_Category" Association="Self.FK_Account_Subcategory_Account_Category">
+      <End Role="Account_Category" EntitySet="Account_Category" />
+      <End Role="Account_Subcategory" EntitySet="Account_Subcategory" />
+    </AssociationSet>
     <AssociationSet Name="FK_Customer_City" Association="Self.FK_Customer_City">
       <End Role="City" EntitySet="City" />
-      <End Role="Customer" EntitySet="Customer" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Customer_Country" Association="Self.FK_Customer_Country">
-      <End Role="Country" EntitySet="Country" />
       <End Role="Customer" EntitySet="Customer" />
     </AssociationSet>
     <AssociationSet Name="FK_Item_Item" Association="Self.FK_Item_Item">

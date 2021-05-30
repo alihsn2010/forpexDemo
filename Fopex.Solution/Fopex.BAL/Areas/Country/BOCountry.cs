@@ -16,18 +16,10 @@ namespace Fopex.BAL.Areas.Country
         {
             try
             {
-              
-                var dtResultSet = DOTravel.GetCountry();
-                if (dtResultSet.Tables[0].Rows.Count > 0)
-                {
-                    var json = JsonConvert.SerializeObject(dtResultSet.Tables[0], Formatting.None, new IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-dd HH:mm:ss" });
-                    var ReturnResult = JsonConvert.DeserializeObject<List<mCountry>>(json);
-                    return ReturnResult;
-                }
-                else
-                {
-                    return null;
-                }
+                DOCountry objDOCountry = new DOCountry();
+
+                var dtResultSet = objDOCountry.GetAllActive();
+                return dtResultSet;
             }
             catch (Exception ex)
             {

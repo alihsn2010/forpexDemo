@@ -10,21 +10,12 @@ namespace Fopex.DAL.Areas.City
 {
     public class DOCity
     {
-
-
-
         mCity ModelCity;
         List<mCity> CityList;
-   
-
-
-
-      
         public List<mCity> GetAllActive()
         {
             CityList = new List<mCity>();
             dbxEntities.City objCity = new dbxEntities.City();
-
             using (FopexEntities1 db = new FopexEntities1())
             {
 

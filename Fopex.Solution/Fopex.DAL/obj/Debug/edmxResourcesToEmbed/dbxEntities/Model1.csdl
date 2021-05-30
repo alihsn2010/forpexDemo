@@ -1,5 +1,95 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="FopexModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="FopexEntities1" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FopexModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FopexModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="TR_GetCountry_SP" ReturnType="Collection(FopexModel.TR_GetCountry_SP_Result)">
+      <Parameter Name="CountryCode" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="PettyCashForms" EntityType="FopexModel.PettyCashForm" />
+    <EntitySet Name="Branches" EntityType="FopexModel.Branch" />
+    <EntitySet Name="Business_Units" EntityType="FopexModel.Business_Units" />
+    <EntitySet Name="TransactionTypes" EntityType="FopexModel.TransactionType" />
+    <EntitySet Name="Customers" EntityType="FopexModel.Customer" />
+    <EntitySet Name="Customer_Type" EntityType="FopexModel.Customer_Type" />
+    <EntitySet Name="Cities" EntityType="FopexModel.City" />
+    <EntitySet Name="QuotationDetails" EntityType="FopexModel.QuotationDetail" />
+    <EntitySet Name="QuotationMasters" EntityType="FopexModel.QuotationMaster" />
+    <EntitySet Name="Countries" EntityType="FopexModel.Country" />
+    <EntitySet Name="Account_Category" EntityType="FopexModel.Account_Category" />
+    <EntitySet Name="Account_Classification" EntityType="FopexModel.Account_Classification" />
+    <EntitySet Name="Account_Head" EntityType="FopexModel.Account_Head" />
+    <EntitySet Name="Account_Subcategory" EntityType="FopexModel.Account_Subcategory" />
+    <EntitySet Name="Chart_of_Account" EntityType="FopexModel.Chart_of_Account" />
+    <EntitySet Name="GL_Main_Category" EntityType="FopexModel.GL_Main_Category" />
+    <EntitySet Name="GL_Sub_Category_TO_DELETE" EntityType="FopexModel.GL_Sub_Category_TO_DELETE" />
+    <EntitySet Name="LedgerTransactions" EntityType="FopexModel.LedgerTransaction" />
+    <EntitySet Name="Items" EntityType="FopexModel.Item" />
+    <EntitySet Name="Item_Ledger" EntityType="FopexModel.Item_Ledger" />
+    <EntitySet Name="ItemTypes" EntityType="FopexModel.ItemType" />
+    <EntitySet Name="Main_Variant" EntityType="FopexModel.Main_Variant" />
+    <EntitySet Name="UOMs" EntityType="FopexModel.UOM" />
+    <EntitySet Name="Variants" EntityType="FopexModel.Variant" />
+    <EntitySet Name="Sales" EntityType="FopexModel.Sale" />
+    <EntitySet Name="SaleInvoices" EntityType="FopexModel.SaleInvoice" />
+    <AssociationSet Name="FK_Customer_City" Association="FopexModel.FK_Customer_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Account_Subcategory_Account_Category" Association="FopexModel.FK_Account_Subcategory_Account_Category">
+      <End Role="Account_Category" EntitySet="Account_Category" />
+      <End Role="Account_Subcategory" EntitySet="Account_Subcategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Item_Item" Association="FopexModel.FK_Item_Item">
+      <End Role="Item" EntitySet="Items" />
+      <End Role="Item1" EntitySet="Items" />
+    </AssociationSet>
+    <EntitySet Name="Regions" EntityType="FopexModel.Region" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="TR_GetCountry_SP_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Country_Name" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Country_Code" Nullable="true" MaxLength="100" />
+  </ComplexType>
   <EntityType Name="PettyCashForm">
     <Key>
       <PropertyRef Name="PettyCashID" />
@@ -51,19 +141,21 @@
     <Property Name="CustID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Customer_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="AddessLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="AddressLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="City" Type="Int32" Nullable="false" />
-    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Country" Type="Int32" Nullable="false" />
     <Property Name="Contact_Person_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Phone_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddessLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="Int32" />
+    <Property Name="City" Type="Int32" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Additional_Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Customer_TypeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IC_Partner_Code_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Salesperson_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Customer_GroupID" Type="Int32" />
+    <Property Name="Customer_Sales_Type_ID" Type="Int32" />
+    <Property Name="Payment_Type_Group_ID" Type="Int32" />
+    <Property Name="Sales_Region" Type="Int32" />
     <Property Name="Invoicing_Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="VAT_Registration_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="EORI_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -76,8 +168,9 @@
     <Property Name="Secondary_Shipment_To_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Primary_Shipment_From_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Secondary_Shipment_From_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="City1" Relationship="Self.FK_Customer_City" FromRole="Customer" ToRole="City" />
-    <NavigationProperty Name="Country1" Relationship="Self.FK_Customer_Country" FromRole="Customer" ToRole="Country" />
+    <Property Name="Assigned_SupervisorID" Type="Int32" />
+    <Property Name="Assigned_SalespersonID" Type="Int32" />
+    <NavigationProperty Name="City1" Relationship="FopexModel.FK_Customer_City" FromRole="Customer" ToRole="City" />
   </EntityType>
   <EntityType Name="Customer_Type">
     <Key>
@@ -92,34 +185,133 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="City_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_City" FromRole="City" ToRole="Customer" />
+    <NavigationProperty Name="Customers" Relationship="FopexModel.FK_Customer_City" FromRole="City" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="QuotationDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PartNo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Serial_No" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="BrandId" Type="Int64" />
+    <Property Name="BrandName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="UOMId" Type="Int64" Nullable="false" />
+    <Property Name="UOMName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="6" />
+    <Property Name="GrossPrice" Type="Decimal" Precision="18" Scale="6" />
+    <Property Name="Margin" Type="Decimal" Precision="18" Scale="6" />
+    <Property Name="MarginType" Type="Int64" />
+    <Property Name="UnitPriceAfterMargin" Type="Decimal" Precision="18" Scale="6" />
+    <Property Name="GrossPriceAfterMargin" Type="Decimal" Precision="18" Scale="6" />
+    <Property Name="Discount" Type="Decimal" Precision="18" Scale="6" />
+    <Property Name="DiscountTypeId" Type="Int64" Nullable="false" />
+    <Property Name="NetAmount" Type="Decimal" Precision="18" Scale="6" />
+    <Property Name="CurrencyId" Type="Int64" Nullable="false" />
+    <Property Name="QutationId" Type="Int64" Nullable="false" />
+    <Property Name="VendorQuotationId" Type="Int64" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="Created_By" Type="Int64" />
+    <Property Name="Create_Date" Type="DateTime" Precision="3" />
+    <Property Name="Update_Date" Type="DateTime" Precision="3" />
+    <Property Name="DiscountedValueAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+    <Property Name="MarginValueAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+  </EntityType>
+  <EntityType Name="QuotationMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegionId" Type="Int64" Nullable="false" />
+    <Property Name="CurrencyId" Type="Int64" Nullable="false" />
+    <Property Name="QutationNo" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="QRRNo" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="CustumerId" Type="Int64" Nullable="false" />
+    <Property Name="QutationSubject" Type="String" Nullable="false" MaxLength="2500" FixedLength="false" Unicode="true" />
+    <Property Name="QutationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="QutationValidity" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CustomrRepresentativeId" Type="Int32" Nullable="false" />
+    <Property Name="QutationSentByUserId" Type="Int64" Nullable="false" />
+    <Property Name="GrossTotal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ApplicableDiscount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ImportDuties" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CustomDuties" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="QutationStatus" Type="Int64" Nullable="false" />
+    <Property Name="BarCodeId" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="BarCodeImageUlr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PaymnetTernsAndCondition" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialNotes" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="VersionNo" Type="Int32" Nullable="false" />
+    <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TermAndConditionId" Type="Int64" Nullable="false" />
+    <Property Name="VendorQutationId" Type="Int64" />
+    <Property Name="TaxId" Type="Int64" />
+    <Property Name="AddedBy" Type="Int64" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="VersionOf" Type="Int64" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="NetTotal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="UploadedFileUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Country">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Country_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Country_Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Country" FromRole="Country" ToRole="Customer" />
+    <Property Name="Country_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Country_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="sysdiagram">
+  <EntityType Name="Account_Category">
     <Key>
-      <PropertyRef Name="diagram_id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Account_Category_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account_Subcategory" Relationship="FopexModel.FK_Account_Subcategory_Account_Category" FromRole="Account_Category" ToRole="Account_Subcategory" />
   </EntityType>
-  <EntityType Name="Country1">
+  <EntityType Name="Account_Classification">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Account_Classification_Code" Type="Int32" />
+    <Property Name="Account_Classification_Description" Type="String" MaxLength="51" FixedLength="false" Unicode="true" />
+    <Property Name="Account_SubcategoryID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Account_Head">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Account_Head_Code" Type="Int32" />
+    <Property Name="Account_Head_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Account_SubclassificationID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Account_Subcategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Account_Subcategory_Code" Type="Int32" />
+    <Property Name="Account_Subcategory_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Account_CategoryID" Type="Int32" />
+    <NavigationProperty Name="Account_Category" Relationship="FopexModel.FK_Account_Subcategory_Account_Category" FromRole="Account_Subcategory" ToRole="Account_Category" />
+  </EntityType>
+  <EntityType Name="Chart_of_Account">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Country_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Country_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Account_CategoryID" Type="Int32" />
+    <Property Name="Account_SubcategoryID" Type="Int32" />
+    <Property Name="Account_ClassificationID" Type="Int32" />
+    <Property Name="Account_SubclassificationID" Type="Int32" />
+    <Property Name="Account_Code" Type="Int32" />
+    <Property Name="Account_Head_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="GL_Main_Category">
     <Key>
@@ -128,6 +320,14 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Main_GL_Code" Type="Int32" />
     <Property Name="Main_GL_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GL_Sub_Category_TO_DELETE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GL_Sub_Category_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GL_Sub_Category_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="LedgerTransaction">
     <Key>
@@ -152,8 +352,12 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Item_No" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="item_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UOM_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Item_Type_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Item_Type_ID" Type="Int32" />
+    <Property Name="UOM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Business_Unit_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Product_Line_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Product_Group_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Item_Category_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Purch_UOM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Sale_UOM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Prod_UOM_ID" Type="Int32" />
@@ -164,15 +368,21 @@
     <Property Name="Qty_Available" Type="Int32" />
     <Property Name="Qty_Sold" Type="Int32" />
     <Property Name="Qty_Adj" Type="Int32" />
-    <Property Name="Business_Unit_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Product_Line_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Product_Group_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Item_Category_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="GLCodeID_Sale" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="GLCodeID_Inventory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="GLCodeID_CostofSale" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Item1" Relationship="Self.FK_Item_Item" FromRole="Item" ToRole="Item1" />
-    <NavigationProperty Name="Item2" Relationship="Self.FK_Item_Item" FromRole="Item1" ToRole="Item" />
+    <NavigationProperty Name="Item1" Relationship="FopexModel.FK_Item_Item" FromRole="Item" ToRole="Item1" />
+    <NavigationProperty Name="Item2" Relationship="FopexModel.FK_Item_Item" FromRole="Item1" ToRole="Item" />
+  </EntityType>
+  <EntityType Name="Item_Ledger">
+    <Key>
+      <PropertyRef Name="Transaction_No" />
+    </Key>
+    <Property Name="Transaction_No" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Transaction_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Item_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
   </EntityType>
   <EntityType Name="ItemType">
     <Key>
@@ -182,6 +392,13 @@
     <Property Name="Item_Type_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Item_Type_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="Main_Variant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Variant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="UOM">
     <Key>
       <PropertyRef Name="ID" />
@@ -190,14 +407,37 @@
     <Property Name="UOM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UOM_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="Variant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Varian_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Invoice_No" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Customer_Ref" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Item_TypeID" Type="Int32" />
+    <Property Name="Item_No" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Item_Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Qty_Ordered" Type="Int32" />
+    <Property Name="Qty_Shipped" Type="Int32" />
+    <Property Name="Qty_Invoiced" Type="Int32" />
+    <Property Name="Qty_Balance" Type="Int32" />
+  </EntityType>
   <EntityType Name="SaleInvoice">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Invoice_No" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CustID" Type="Int32" />
+    <Property Name="Inv_Date" Type="DateTime" Precision="0" />
+    <Property Name="Customer_ID" Type="Int32" />
     <Property Name="Customer_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Customer_Ref" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Item_Type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -207,10 +447,19 @@
     <Property Name="Qty_Shipped" Type="Int32" />
     <Property Name="Qty_Invoiced" Type="Int32" />
     <Property Name="Qty_Balance" Type="Int32" />
+    <Property Name="Payment_TermID" Type="Int32" />
+    <Property Name="Quotation_Ref" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Delivery_Date" Type="DateTime" Precision="0" />
+    <Property Name="SalespersonID" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Amount_Ordered" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Amount_Invoiced" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="CurrencyID" Type="Int32" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Customer_City">
-    <End Role="City" Type="Self.City" Multiplicity="1" />
-    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <End Type="FopexModel.City" Role="City" Multiplicity="0..1" />
+    <End Type="FopexModel.Customer" Role="Customer" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="City">
         <PropertyRef Name="ID" />
@@ -220,21 +469,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Customer_Country">
-    <End Role="Country" Type="Self.Country" Multiplicity="1" />
-    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+  <Association Name="FK_Account_Subcategory_Account_Category">
+    <End Type="FopexModel.Account_Category" Role="Account_Category" Multiplicity="0..1" />
+    <End Type="FopexModel.Account_Subcategory" Role="Account_Subcategory" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Country">
+      <Principal Role="Account_Category">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Customer">
-        <PropertyRef Name="Country" />
+      <Dependent Role="Account_Subcategory">
+        <PropertyRef Name="Account_CategoryID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Item_Item">
-    <End Role="Item" Type="Self.Item" Multiplicity="1" />
-    <End Role="Item1" Type="Self.Item" Multiplicity="0..1" />
+    <End Type="FopexModel.Item" Role="Item" Multiplicity="1" />
+    <End Type="FopexModel.Item" Role="Item1" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Item">
         <PropertyRef Name="ID" />
@@ -244,83 +493,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="FopexEntities1" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="PettyCashForms" EntityType="Self.PettyCashForm" />
-    <EntitySet Name="Branches" EntityType="Self.Branch" />
-    <EntitySet Name="Business_Units" EntityType="Self.Business_Units" />
-    <EntitySet Name="TransactionTypes" EntityType="Self.TransactionType" />
-    <EntitySet Name="Customers" EntityType="Self.Customer" />
-    <EntitySet Name="Customer_Type" EntityType="Self.Customer_Type" />
-    <EntitySet Name="Cities" EntityType="Self.City" />
-    <EntitySet Name="Countries" EntityType="Self.Country" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-    <EntitySet Name="Country1" EntityType="Self.Country1" />
-    <EntitySet Name="GL_Main_Category" EntityType="Self.GL_Main_Category" />
-    <EntitySet Name="LedgerTransactions" EntityType="Self.LedgerTransaction" />
-    <EntitySet Name="Items" EntityType="Self.Item" />
-    <EntitySet Name="ItemTypes" EntityType="Self.ItemType" />
-    <EntitySet Name="UOMs" EntityType="Self.UOM" />
-    <EntitySet Name="SaleInvoices" EntityType="Self.SaleInvoice" />
-    <AssociationSet Name="FK_Customer_City" Association="Self.FK_Customer_City">
-      <End Role="City" EntitySet="Cities" />
-      <End Role="Customer" EntitySet="Customers" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Customer_Country" Association="Self.FK_Customer_Country">
-      <End Role="Country" EntitySet="Countries" />
-      <End Role="Customer" EntitySet="Customers" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Item_Item" Association="Self.FK_Item_Item">
-      <End Role="Item" EntitySet="Items" />
-      <End Role="Item1" EntitySet="Items" />
-    </AssociationSet>
-    <FunctionImport Name="sp_alterdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_creatediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_dropdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FopexModel.sp_helpdiagramdefinition_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FopexModel.sp_helpdiagrams_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
-    <FunctionImport Name="TR_GetCountry_SP" ReturnType="Collection(FopexModel.TR_GetCountry_SP_Result)">
-      <Parameter Name="CountryCode" Mode="In" Type="String" />
-    </FunctionImport>
-  </EntityContainer>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
-  </ComplexType>
-  <ComplexType Name="TR_GetCountry_SP_Result">
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Country_Name" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Country_Code" Nullable="true" MaxLength="100" />
-  </ComplexType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Region_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Region_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Int32" />
+  </EntityType>
 </Schema>

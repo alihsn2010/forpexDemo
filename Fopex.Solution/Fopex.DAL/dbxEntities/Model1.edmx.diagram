@@ -5,25 +5,36 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7148a84aee35404b835807468707f3ef" Name="Diagram1" ZoomLevel="53">
-        <EntityTypeShape EntityType="FopexModel.PettyCashForm" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.Branch" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.Business_Units" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.TransactionType" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.Customer" Width="1.5" PointX="5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.Customer_Type" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.City" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.Country" Width="1.5" PointX="2.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.Country1" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.GL_Main_Category" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.LedgerTransaction" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.Item" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.ItemType" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.UOM" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FopexModel.SaleInvoice" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
-        <AssociationConnector Association="FopexModel.FK_Customer_City" ManuallyRouted="false" />
-        <AssociationConnector Association="FopexModel.FK_Customer_Country" ManuallyRouted="false" />
-        <AssociationConnector Association="FopexModel.FK_Item_Item" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FopexModel.PettyCashForm" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FopexModel.Branch" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="FopexModel.Business_Units" Width="1.5" PointX="7.75" PointY="8.75" />
+        <EntityTypeShape EntityType="FopexModel.TransactionType" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FopexModel.Customer" Width="1.5" PointX="5" PointY="4.25" />
+        <EntityTypeShape EntityType="FopexModel.Customer_Type" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="FopexModel.City" Width="1.5" PointX="2.75" PointY="7.125" />
+        <EntityTypeShape EntityType="FopexModel.QuotationDetail" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FopexModel.QuotationMaster" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FopexModel.Country" Width="1.5" PointX="7.75" PointY="11.75" />
+        <EntityTypeShape EntityType="FopexModel.Account_Category" Width="1.5" PointX="2.75" PointY="1.125" />
+        <EntityTypeShape EntityType="FopexModel.Account_Classification" Width="1.5" PointX="11.75" PointY="8.75" />
+        <EntityTypeShape EntityType="FopexModel.Account_Head" Width="1.5" PointX="9.75" PointY="11.75" />
+        <EntityTypeShape EntityType="FopexModel.Account_Subcategory" Width="1.5" PointX="5" PointY="0.875" />
+        <EntityTypeShape EntityType="FopexModel.Chart_of_Account" Width="1.5" PointX="11.75" PointY="11.75" />
+        <EntityTypeShape EntityType="FopexModel.GL_Main_Category" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FopexModel.GL_Sub_Category_TO_DELETE" Width="1.5" PointX="2.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FopexModel.LedgerTransaction" Width="1.5" PointX="4.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FopexModel.Item" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FopexModel.Item_Ledger" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FopexModel.ItemType" Width="1.5" PointX="13.75" PointY="3.75" />
+        <EntityTypeShape EntityType="FopexModel.Main_Variant" Width="1.5" PointX="13.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FopexModel.UOM" Width="1.5" PointX="13.75" PointY="9.75" />
+        <EntityTypeShape EntityType="FopexModel.Variant" Width="1.5" PointX="13.75" PointY="12.75" />
+        <EntityTypeShape EntityType="FopexModel.Sale" Width="1.5" PointX="6.75" PointY="14.75" />
+        <EntityTypeShape EntityType="FopexModel.SaleInvoice" Width="1.5" PointX="8.75" PointY="14.75" />
+        <AssociationConnector Association="FopexModel.FK_Customer_City" />
+        <AssociationConnector Association="FopexModel.FK_Account_Subcategory_Account_Category" />
+        <AssociationConnector Association="FopexModel.FK_Item_Item" />
+        <EntityTypeShape EntityType="FopexModel.Region" Width="1.5" PointX="0.75" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

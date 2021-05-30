@@ -59,6 +59,7 @@
     <Compile Include="Areas\City\DOCity.cs" />
     <Compile Include="Areas\Country\DOCountry.cs" />
     <Compile Include="Areas\Customer\DOCustomer.cs" />
+    <Compile Include="Areas\Region\DORegion.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Common\AgentException.cs" />
     <Compile Include="Common\Class1.cs" />
@@ -66,19 +67,31 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\CryptographyHelper.cs" />
     <Compile Include="Common\SafeConvert.cs.cs" />
+    <Compile Include="dbxEntities\Account_Category.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbxEntities\Account_Classification.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbxEntities\Account_Head.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbxEntities\Account_Subcategory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="dbxEntities\Branch.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="dbxEntities\Business_Units.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="dbxEntities\Chart_of_Account.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="dbxEntities\City.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="dbxEntities\Country.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dbxEntities\Country1.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="dbxEntities\Customer.cs">
@@ -90,13 +103,22 @@
     <Compile Include="dbxEntities\GL_Main_Category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="dbxEntities\GL_Sub_Category_TO_DELETE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="dbxEntities\Item.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="dbxEntities\ItemType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="dbxEntities\Item_Ledger.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="dbxEntities\LedgerTransaction.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbxEntities\Main_Variant.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="dbxEntities\Model1.Context.cs">
@@ -117,6 +139,18 @@
     <Compile Include="dbxEntities\PettyCashForm.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="dbxEntities\QuotationDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbxEntities\QuotationMaster.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbxEntities\Region.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbxEntities\Sale.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="dbxEntities\SaleInvoice.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -124,9 +158,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="dbxEntities\sp_helpdiagrams_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dbxEntities\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="dbxEntities\TransactionType.cs">
@@ -138,10 +169,15 @@
     <Compile Include="dbxEntities\UOM.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="dbxEntities\Variant.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\City\mCity.cs" />
     <Compile Include="Model\Class1.cs" />
     <Compile Include="Model\Country\mCountry.cs" />
+    <Compile Include="Model\Country\mCountry1.cs" />
     <Compile Include="Model\Customer\mCustomer.cs" />
+    <Compile Include="Model\Region\mRegion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\DBCon.cs" />
   </ItemGroup>

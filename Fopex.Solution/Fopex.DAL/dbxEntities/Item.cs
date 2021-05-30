@@ -17,8 +17,12 @@ namespace Fopex.DAL.dbxEntities
         public int ID { get; set; }
         public string Item_No { get; set; }
         public string item_Description { get; set; }
+        public Nullable<int> Item_Type_ID { get; set; }
         public string UOM_ID { get; set; }
-        public string Item_Type_ID { get; set; }
+        public string Business_Unit_ID { get; set; }
+        public string Product_Line_ID { get; set; }
+        public string Product_Group_ID { get; set; }
+        public string Item_Category_ID { get; set; }
         public string Purch_UOM_ID { get; set; }
         public string Sale_UOM_ID { get; set; }
         public Nullable<int> Prod_UOM_ID { get; set; }
@@ -29,10 +33,6 @@ namespace Fopex.DAL.dbxEntities
         public Nullable<int> Qty_Available { get; set; }
         public Nullable<int> Qty_Sold { get; set; }
         public Nullable<int> Qty_Adj { get; set; }
-        public string Business_Unit_ID { get; set; }
-        public string Product_Line_ID { get; set; }
-        public string Product_Group_ID { get; set; }
-        public string Item_Category_ID { get; set; }
         public string GLCodeID_Sale { get; set; }
         public string GLCodeID_Inventory { get; set; }
         public string GLCodeID_CostofSale { get; set; }

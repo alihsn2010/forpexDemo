@@ -14,15 +14,8 @@ namespace Fopex.DAL.dbxEntities
     
     public partial class Country
     {
-        public Country()
-        {
-            this.Customers = new HashSet<Customer>();
-        }
-    
         public int ID { get; set; }
-        public string Country_Name { get; set; }
         public string Country_Code { get; set; }
-    
-        public virtual ICollection<Customer> Customers { get; set; }
+        public string Country_Name { get; set; }
     }
 }

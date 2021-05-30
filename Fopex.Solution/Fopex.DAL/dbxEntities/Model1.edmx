@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FopexModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FopexModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="PettyCashForm">
           <Key>
             <PropertyRef Name="PettyCashID" />
@@ -56,19 +56,21 @@
           <Property Name="CustID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Customer_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Customer_Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="AddessLine1" Type="nvarchar" MaxLength="50" />
-          <Property Name="AddressLine2" Type="nvarchar" MaxLength="50" />
-          <Property Name="City" Type="int" Nullable="false" />
-          <Property Name="State" Type="nvarchar" MaxLength="50" />
-          <Property Name="Province" Type="nvarchar" MaxLength="50" />
-          <Property Name="Region" Type="nvarchar" MaxLength="50" />
-          <Property Name="Country" Type="int" Nullable="false" />
           <Property Name="Contact_Person_Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone_No" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="AddessLine1" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddressLine2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="int" />
+          <Property Name="City" Type="int" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Region" Type="nvarchar" MaxLength="50" />
+          <Property Name="Additional_Notes" Type="nvarchar(max)" />
           <Property Name="Customer_TypeID" Type="nvarchar" MaxLength="50" />
-          <Property Name="IC_Partner_Code_ID" Type="nvarchar" MaxLength="50" />
-          <Property Name="Salesperson_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Customer_GroupID" Type="int" />
+          <Property Name="Customer_Sales_Type_ID" Type="int" />
+          <Property Name="Payment_Type_Group_ID" Type="int" />
+          <Property Name="Sales_Region" Type="int" />
           <Property Name="Invoicing_Currency" Type="nvarchar" MaxLength="50" />
           <Property Name="VAT_Registration_No" Type="nvarchar" MaxLength="50" />
           <Property Name="EORI_Number" Type="nvarchar" MaxLength="50" />
@@ -81,6 +83,8 @@
           <Property Name="Secondary_Shipment_To_Location" Type="nvarchar" MaxLength="50" />
           <Property Name="Primary_Shipment_From_Location" Type="nvarchar" MaxLength="50" />
           <Property Name="Secondary_Shipment_From_Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="Assigned_SupervisorID" Type="int" />
+          <Property Name="Assigned_SalespersonID" Type="int" />
         </EntityType>
         <EntityType Name="Customer_Type">
           <Key>
@@ -96,31 +100,138 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="City_Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Country">
+        <EntityType Name="QuotationDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartNo" Type="nvarchar" MaxLength="500" />
+          <Property Name="Serial_No" Type="nvarchar" MaxLength="500" />
+          <Property Name="BrandId" Type="bigint" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="UOMId" Type="bigint" Nullable="false" />
+          <Property Name="UOMName" Type="nvarchar" MaxLength="500" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="GrossPrice" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="Margin" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="MarginType" Type="bigint" />
+          <Property Name="UnitPriceAfterMargin" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="GrossPriceAfterMargin" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="DiscountTypeId" Type="bigint" Nullable="false" />
+          <Property Name="NetAmount" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="CurrencyId" Type="bigint" Nullable="false" />
+          <Property Name="QutationId" Type="bigint" Nullable="false" />
+          <Property Name="VendorQuotationId" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Created_By" Type="bigint" />
+          <Property Name="Create_Date" Type="datetime" />
+          <Property Name="Update_Date" Type="datetime" />
+          <Property Name="DiscountedValueAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="MarginValueAmount" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuotationMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionId" Type="bigint" Nullable="false" />
+          <Property Name="CurrencyId" Type="bigint" Nullable="false" />
+          <Property Name="QutationNo" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="QRRNo" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="CustumerId" Type="bigint" Nullable="false" />
+          <Property Name="QutationSubject" Type="nvarchar" MaxLength="2500" Nullable="false" />
+          <Property Name="QutationDate" Type="datetime" Nullable="false" />
+          <Property Name="QutationValidity" Type="datetime" Nullable="false" />
+          <Property Name="CustomrRepresentativeId" Type="int" Nullable="false" />
+          <Property Name="QutationSentByUserId" Type="bigint" Nullable="false" />
+          <Property Name="GrossTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ApplicableDiscount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ImportDuties" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CustomDuties" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="QutationStatus" Type="bigint" Nullable="false" />
+          <Property Name="BarCodeId" Type="nvarchar" MaxLength="4000" />
+          <Property Name="BarCodeImageUlr" Type="nvarchar" MaxLength="200" />
+          <Property Name="PaymnetTernsAndCondition" Type="nvarchar" MaxLength="4000" />
+          <Property Name="SpecialNotes" Type="nvarchar" MaxLength="4000" />
+          <Property Name="VersionNo" Type="int" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" />
+          <Property Name="TermAndConditionId" Type="bigint" Nullable="false" />
+          <Property Name="VendorQutationId" Type="bigint" />
+          <Property Name="TaxId" Type="bigint" />
+          <Property Name="AddedBy" Type="bigint" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="VersionOf" Type="bigint" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="NetTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UploadedFileUrl" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Region">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Country_Name" Type="varchar" MaxLength="100" />
-          <Property Name="Country_Code" Type="varchar" MaxLength="100" />
+          <Property Name="Region_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Region_Code" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="int" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <EntityType Name="Country1">
+        <EntityType Name="Country">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Country_Code" Type="nvarchar" MaxLength="50" />
           <Property Name="Country_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Account_Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Account_Category_Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Account_Classification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Account_Classification_Code" Type="int" />
+          <Property Name="Account_Classification_Description" Type="nvarchar" MaxLength="51" />
+          <Property Name="Account_SubcategoryID" Type="int" />
+        </EntityType>
+        <EntityType Name="Account_Head">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Account_Head_Code" Type="int" />
+          <Property Name="Account_Head_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Account_SubclassificationID" Type="int" />
+        </EntityType>
+        <EntityType Name="Account_Subcategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Account_Subcategory_Code" Type="int" />
+          <Property Name="Account_Subcategory_Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Account_CategoryID" Type="int" />
+        </EntityType>
+        <EntityType Name="Chart_of_Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Account_CategoryID" Type="int" />
+          <Property Name="Account_SubcategoryID" Type="int" />
+          <Property Name="Account_ClassificationID" Type="int" />
+          <Property Name="Account_SubclassificationID" Type="int" />
+          <Property Name="Account_Code" Type="int" />
+          <Property Name="Account_Head_Description" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="GL_Main_Category">
           <Key>
@@ -129,6 +240,14 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Main_GL_Code" Type="int" />
           <Property Name="Main_GL_Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GL_Sub_Category TO DELETE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GL_Sub_Category_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="GL_Sub_Category_Description" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="LedgerTransactions">
           <Key>
@@ -153,8 +272,12 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Item_No" Type="nvarchar" MaxLength="10" />
           <Property Name="item_Description" Type="nvarchar" MaxLength="50" />
-          <Property Name="UOM_ID" Type="nchar" MaxLength="10" />
-          <Property Name="Item_Type_ID" Type="nchar" MaxLength="10" />
+          <Property Name="Item_Type_ID" Type="int" />
+          <Property Name="UOM_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Business_Unit_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Product_Line_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Product_Group_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Item_Category_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Purch_UOM_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Sale_UOM_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Prod_UOM_ID" Type="int" />
@@ -165,13 +288,19 @@
           <Property Name="Qty_Available" Type="int" />
           <Property Name="Qty_Sold" Type="int" />
           <Property Name="Qty_Adj" Type="int" />
-          <Property Name="Business_Unit_ID" Type="nchar" MaxLength="10" />
-          <Property Name="Product_Line_ID" Type="nchar" MaxLength="10" />
-          <Property Name="Product_Group_ID" Type="nchar" MaxLength="10" />
-          <Property Name="Item_Category_ID" Type="nchar" MaxLength="10" />
           <Property Name="GLCodeID_Sale" Type="nvarchar" MaxLength="50" />
           <Property Name="GLCodeID_Inventory" Type="nvarchar" MaxLength="50" />
           <Property Name="GLCodeID_CostofSale" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Item_Ledger">
+          <Key>
+            <PropertyRef Name="Transaction_No" />
+          </Key>
+          <Property Name="Transaction_No" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Transaction_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Item_No" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
         </EntityType>
         <EntityType Name="ItemType">
           <Key>
@@ -181,6 +310,13 @@
           <Property Name="Item_Type_Code" Type="nvarchar" MaxLength="50" />
           <Property Name="Item_Type_Description" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Main_Variant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Variant_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="UOM">
           <Key>
             <PropertyRef Name="ID" />
@@ -189,26 +325,37 @@
           <Property Name="UOM_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="UOM_Description" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Variants">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Varian_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Sale">
-          <Property Name="Sale_qty" Type="int" />
-          <Property Name="Sale_Amount" Type="money" />
-          <Property Name="Customer_Name" Type="nchar" MaxLength="10" />
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Invoice_No" Type="nchar" MaxLength="10" />
+          <Property Name="Customer_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Customer_Ref" Type="nvarchar" MaxLength="50" />
+          <Property Name="Item_TypeID" Type="int" />
           <Property Name="Item_No" Type="nchar" MaxLength="10" />
           <Property Name="Item_Description" Type="nchar" MaxLength="10" />
-          <Property Name="CreditSale_qty" Type="int" />
-          <Property Name="CreditSale_Amount" Type="money" />
-        </EntityType>-->
+          <Property Name="Qty_Ordered" Type="int" />
+          <Property Name="Qty_Shipped" Type="int" />
+          <Property Name="Qty_Invoiced" Type="int" />
+          <Property Name="Qty_Balance" Type="int" />
+        </EntityType>
         <EntityType Name="SaleInvoice">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Invoice_No" Type="nchar" MaxLength="10" />
-          <Property Name="Date" Type="nvarchar" MaxLength="50" />
-          <Property Name="CustID" Type="int" />
+          <Property Name="Inv_Date" Type="date" />
+          <Property Name="Customer_ID" Type="int" />
           <Property Name="Customer_Name" Type="nchar" MaxLength="10" />
           <Property Name="Customer_Ref" Type="nchar" MaxLength="10" />
           <Property Name="Item_Type" Type="nchar" MaxLength="10" />
@@ -218,9 +365,30 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
           <Property Name="Qty_Shipped" Type="int" />
           <Property Name="Qty_Invoiced" Type="int" />
           <Property Name="Qty_Balance" Type="int" />
+          <Property Name="Payment_TermID" Type="int" />
+          <Property Name="Quotation_Ref" Type="nchar" MaxLength="10" />
+          <Property Name="Delivery_Date" Type="date" />
+          <Property Name="SalespersonID" Type="int" />
+          <Property Name="Status" Type="nchar" MaxLength="10" />
+          <Property Name="Amount_Ordered" Type="money" />
+          <Property Name="Amount_Invoiced" Type="money" />
+          <Property Name="CurrencyID" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_Account_Subcategory_Account_Category">
+          <End Role="Account_Category" Type="Self.Account_Category" Multiplicity="0..1" />
+          <End Role="Account_Subcategory" Type="Self.Account_Subcategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account_Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account_Subcategory">
+              <PropertyRef Name="Account_CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Customer_City">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
@@ -228,18 +396,6 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
             </Principal>
             <Dependent Role="Customer">
               <PropertyRef Name="City" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customer_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="Country" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -255,40 +411,6 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="TR_GetCountry_SP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="CountryCode" Type="varchar" Mode="In" />
-        </Function>
         <EntityContainer Name="FopexModelStoreContainer">
           <EntitySet Name="PettyCashForm" EntityType="Self.PettyCashForm" Schema="Cash" store:Type="Tables" />
           <EntitySet Name="Branch" EntityType="Self.Branch" Schema="Company_Setup" store:Type="Tables" />
@@ -297,21 +419,32 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="Customer" store:Type="Tables" />
           <EntitySet Name="Customer_Type" EntityType="Self.Customer_Type" Schema="Customer" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Country1" EntityType="Self.Country1" Schema="General_Setup" Table="Country" store:Type="Tables" />
+          <EntitySet Name="QuotationDetail" EntityType="Self.QuotationDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuotationMaster" EntityType="Self.QuotationMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="General_Setup" store:Type="Tables" />
+          <EntitySet Name="Account_Category" EntityType="Self.Account_Category" Schema="GL" store:Type="Tables" />
+          <EntitySet Name="Account_Classification" EntityType="Self.Account_Classification" Schema="GL" store:Type="Tables" />
+          <EntitySet Name="Account_Head" EntityType="Self.Account_Head" Schema="GL" store:Type="Tables" />
+          <EntitySet Name="Account_Subcategory" EntityType="Self.Account_Subcategory" Schema="GL" store:Type="Tables" />
+          <EntitySet Name="Chart_of_Account" EntityType="Self.Chart_of_Account" Schema="GL" store:Type="Tables" />
           <EntitySet Name="GL_Main_Category" EntityType="Self.GL_Main_Category" Schema="GL" store:Type="Tables" />
+          <EntitySet Name="GL_Sub_Category TO DELETE" EntityType="Self.GL_Sub_Category TO DELETE" Schema="GL" store:Type="Tables" />
           <EntitySet Name="LedgerTransactions" EntityType="Self.LedgerTransactions" Schema="GL" store:Type="Tables" />
           <EntitySet Name="Item" EntityType="Self.Item" Schema="Item" store:Type="Tables" />
+          <EntitySet Name="Item_Ledger" EntityType="Self.Item_Ledger" Schema="Item" store:Type="Tables" />
           <EntitySet Name="ItemType" EntityType="Self.ItemType" Schema="Item" store:Type="Tables" />
+          <EntitySet Name="Main_Variant" EntityType="Self.Main_Variant" Schema="Item" store:Type="Tables" />
           <EntitySet Name="UOM" EntityType="Self.UOM" Schema="Item" store:Type="Tables" />
+          <EntitySet Name="Variants" EntityType="Self.Variants" Schema="Item" store:Type="Tables" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="Sales" store:Type="Tables" />
           <EntitySet Name="SaleInvoice" EntityType="Self.SaleInvoice" Schema="Sales" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_Subcategory_Account_Category" Association="Self.FK_Account_Subcategory_Account_Category">
+            <End Role="Account_Category" EntitySet="Account_Category" />
+            <End Role="Account_Subcategory" EntitySet="Account_Subcategory" />
+          </AssociationSet>
           <AssociationSet Name="FK_Customer_City" Association="Self.FK_Customer_City">
             <End Role="City" EntitySet="City" />
-            <End Role="Customer" EntitySet="Customer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_Country" Association="Self.FK_Customer_Country">
-            <End Role="Country" EntitySet="Country" />
             <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
           <AssociationSet Name="FK_Item_Item" Association="Self.FK_Item_Item">
@@ -319,11 +452,100 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
             <End Role="Item1" EntitySet="Item" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FopexModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FopexEntities1" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FopexModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FopexModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="TR_GetCountry_SP" ReturnType="Collection(FopexModel.TR_GetCountry_SP_Result)">
+          <Parameter Name="CountryCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="PettyCashForms" EntityType="FopexModel.PettyCashForm" />
+          <EntitySet Name="Branches" EntityType="FopexModel.Branch" />
+          <EntitySet Name="Business_Units" EntityType="FopexModel.Business_Units" />
+          <EntitySet Name="TransactionTypes" EntityType="FopexModel.TransactionType" />
+          <EntitySet Name="Customers" EntityType="FopexModel.Customer" />
+          <EntitySet Name="Customer_Type" EntityType="FopexModel.Customer_Type" />
+          <EntitySet Name="Cities" EntityType="FopexModel.City" />
+          <EntitySet Name="QuotationDetails" EntityType="FopexModel.QuotationDetail" />
+          <EntitySet Name="QuotationMasters" EntityType="FopexModel.QuotationMaster" />
+          <EntitySet Name="Countries" EntityType="FopexModel.Country" />
+          <EntitySet Name="Account_Category" EntityType="FopexModel.Account_Category" />
+          <EntitySet Name="Account_Classification" EntityType="FopexModel.Account_Classification" />
+          <EntitySet Name="Account_Head" EntityType="FopexModel.Account_Head" />
+          <EntitySet Name="Account_Subcategory" EntityType="FopexModel.Account_Subcategory" />
+          <EntitySet Name="Chart_of_Account" EntityType="FopexModel.Chart_of_Account" />
+          <EntitySet Name="GL_Main_Category" EntityType="FopexModel.GL_Main_Category" />
+          <EntitySet Name="GL_Sub_Category_TO_DELETE" EntityType="FopexModel.GL_Sub_Category_TO_DELETE" />
+          <EntitySet Name="LedgerTransactions" EntityType="FopexModel.LedgerTransaction" />
+          <EntitySet Name="Items" EntityType="FopexModel.Item" />
+          <EntitySet Name="Item_Ledger" EntityType="FopexModel.Item_Ledger" />
+          <EntitySet Name="ItemTypes" EntityType="FopexModel.ItemType" />
+          <EntitySet Name="Main_Variant" EntityType="FopexModel.Main_Variant" />
+          <EntitySet Name="UOMs" EntityType="FopexModel.UOM" />
+          <EntitySet Name="Variants" EntityType="FopexModel.Variant" />
+          <EntitySet Name="Sales" EntityType="FopexModel.Sale" />
+          <EntitySet Name="SaleInvoices" EntityType="FopexModel.SaleInvoice" />
+          <AssociationSet Name="FK_Customer_City" Association="FopexModel.FK_Customer_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_Subcategory_Account_Category" Association="FopexModel.FK_Account_Subcategory_Account_Category">
+            <End Role="Account_Category" EntitySet="Account_Category" />
+            <End Role="Account_Subcategory" EntitySet="Account_Subcategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Item" Association="FopexModel.FK_Item_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Item1" EntitySet="Items" />
+          </AssociationSet>
+          <EntitySet Name="Regions" EntityType="FopexModel.Region" />
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="TR_GetCountry_SP_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Country_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Country_Code" Nullable="true" MaxLength="100" />
+        </ComplexType>
         <EntityType Name="PettyCashForm">
           <Key>
             <PropertyRef Name="PettyCashID" />
@@ -375,19 +597,21 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
           <Property Name="CustID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Customer_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AddessLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="Int32" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="Int32" Nullable="false" />
           <Property Name="Contact_Person_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AddessLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="Int32" />
+          <Property Name="City" Type="Int32" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Additional_Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Customer_TypeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IC_Partner_Code_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Salesperson_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_GroupID" Type="Int32" />
+          <Property Name="Customer_Sales_Type_ID" Type="Int32" />
+          <Property Name="Payment_Type_Group_ID" Type="Int32" />
+          <Property Name="Sales_Region" Type="Int32" />
           <Property Name="Invoicing_Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="VAT_Registration_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EORI_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -400,8 +624,9 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
           <Property Name="Secondary_Shipment_To_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Primary_Shipment_From_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Secondary_Shipment_From_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="City1" Relationship="Self.FK_Customer_City" FromRole="Customer" ToRole="City" />
-          <NavigationProperty Name="Country1" Relationship="Self.FK_Customer_Country" FromRole="Customer" ToRole="Country" />
+          <Property Name="Assigned_SupervisorID" Type="Int32" />
+          <Property Name="Assigned_SalespersonID" Type="Int32" />
+          <NavigationProperty Name="City1" Relationship="FopexModel.FK_Customer_City" FromRole="Customer" ToRole="City" />
         </EntityType>
         <EntityType Name="Customer_Type">
           <Key>
@@ -416,34 +641,133 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="City_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_City" FromRole="City" ToRole="Customer" />
+          <NavigationProperty Name="Customers" Relationship="FopexModel.FK_Customer_City" FromRole="City" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="QuotationDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartNo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Serial_No" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BrandId" Type="Int64" />
+          <Property Name="BrandName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="UOMId" Type="Int64" Nullable="false" />
+          <Property Name="UOMName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="GrossPrice" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="Margin" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="MarginType" Type="Int64" />
+          <Property Name="UnitPriceAfterMargin" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="GrossPriceAfterMargin" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="DiscountTypeId" Type="Int64" Nullable="false" />
+          <Property Name="NetAmount" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="CurrencyId" Type="Int64" Nullable="false" />
+          <Property Name="QutationId" Type="Int64" Nullable="false" />
+          <Property Name="VendorQuotationId" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Created_By" Type="Int64" />
+          <Property Name="Create_Date" Type="DateTime" Precision="3" />
+          <Property Name="Update_Date" Type="DateTime" Precision="3" />
+          <Property Name="DiscountedValueAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="MarginValueAmount" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+        </EntityType>
+        <EntityType Name="QuotationMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionId" Type="Int64" Nullable="false" />
+          <Property Name="CurrencyId" Type="Int64" Nullable="false" />
+          <Property Name="QutationNo" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="QRRNo" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="CustumerId" Type="Int64" Nullable="false" />
+          <Property Name="QutationSubject" Type="String" Nullable="false" MaxLength="2500" FixedLength="false" Unicode="true" />
+          <Property Name="QutationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QutationValidity" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CustomrRepresentativeId" Type="Int32" Nullable="false" />
+          <Property Name="QutationSentByUserId" Type="Int64" Nullable="false" />
+          <Property Name="GrossTotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ApplicableDiscount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ImportDuties" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CustomDuties" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="QutationStatus" Type="Int64" Nullable="false" />
+          <Property Name="BarCodeId" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="BarCodeImageUlr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PaymnetTernsAndCondition" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="SpecialNotes" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="VersionNo" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TermAndConditionId" Type="Int64" Nullable="false" />
+          <Property Name="VendorQutationId" Type="Int64" />
+          <Property Name="TaxId" Type="Int64" />
+          <Property Name="AddedBy" Type="Int64" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="VersionOf" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="NetTotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UploadedFileUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Country_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Country_Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Country" FromRole="Country" ToRole="Customer" />
+          <Property Name="Country_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="Account_Category">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Account_Category_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account_Subcategory" Relationship="FopexModel.FK_Account_Subcategory_Account_Category" FromRole="Account_Category" ToRole="Account_Subcategory" />
         </EntityType>
-        <EntityType Name="Country1">
+        <EntityType Name="Account_Classification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Account_Classification_Code" Type="Int32" />
+          <Property Name="Account_Classification_Description" Type="String" MaxLength="51" FixedLength="false" Unicode="true" />
+          <Property Name="Account_SubcategoryID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Account_Head">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Account_Head_Code" Type="Int32" />
+          <Property Name="Account_Head_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Account_SubclassificationID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Account_Subcategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Account_Subcategory_Code" Type="Int32" />
+          <Property Name="Account_Subcategory_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Account_CategoryID" Type="Int32" />
+          <NavigationProperty Name="Account_Category" Relationship="FopexModel.FK_Account_Subcategory_Account_Category" FromRole="Account_Subcategory" ToRole="Account_Category" />
+        </EntityType>
+        <EntityType Name="Chart_of_Account">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Country_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Country_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Account_CategoryID" Type="Int32" />
+          <Property Name="Account_SubcategoryID" Type="Int32" />
+          <Property Name="Account_ClassificationID" Type="Int32" />
+          <Property Name="Account_SubclassificationID" Type="Int32" />
+          <Property Name="Account_Code" Type="Int32" />
+          <Property Name="Account_Head_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="GL_Main_Category">
           <Key>
@@ -452,6 +776,14 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Main_GL_Code" Type="Int32" />
           <Property Name="Main_GL_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GL_Sub_Category_TO_DELETE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GL_Sub_Category_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GL_Sub_Category_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LedgerTransaction">
           <Key>
@@ -476,8 +808,12 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Item_No" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="item_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UOM_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Item_Type_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Item_Type_ID" Type="Int32" />
+          <Property Name="UOM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Business_Unit_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Line_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Group_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Item_Category_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Purch_UOM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Sale_UOM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Prod_UOM_ID" Type="Int32" />
@@ -488,15 +824,21 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
           <Property Name="Qty_Available" Type="Int32" />
           <Property Name="Qty_Sold" Type="Int32" />
           <Property Name="Qty_Adj" Type="Int32" />
-          <Property Name="Business_Unit_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Product_Line_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Product_Group_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Item_Category_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="GLCodeID_Sale" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GLCodeID_Inventory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GLCodeID_CostofSale" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Item1" Relationship="Self.FK_Item_Item" FromRole="Item" ToRole="Item1" />
-          <NavigationProperty Name="Item2" Relationship="Self.FK_Item_Item" FromRole="Item1" ToRole="Item" />
+          <NavigationProperty Name="Item1" Relationship="FopexModel.FK_Item_Item" FromRole="Item" ToRole="Item1" />
+          <NavigationProperty Name="Item2" Relationship="FopexModel.FK_Item_Item" FromRole="Item1" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Item_Ledger">
+          <Key>
+            <PropertyRef Name="Transaction_No" />
+          </Key>
+          <Property Name="Transaction_No" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Transaction_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Item_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
         </EntityType>
         <EntityType Name="ItemType">
           <Key>
@@ -506,6 +848,13 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
           <Property Name="Item_Type_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Item_Type_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Main_Variant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Variant_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="UOM">
           <Key>
             <PropertyRef Name="ID" />
@@ -514,14 +863,37 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
           <Property Name="UOM_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UOM_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Variant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Varian_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Invoice_No" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_Ref" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Item_TypeID" Type="Int32" />
+          <Property Name="Item_No" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Item_Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Qty_Ordered" Type="Int32" />
+          <Property Name="Qty_Shipped" Type="Int32" />
+          <Property Name="Qty_Invoiced" Type="Int32" />
+          <Property Name="Qty_Balance" Type="Int32" />
+        </EntityType>
         <EntityType Name="SaleInvoice">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Invoice_No" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CustID" Type="Int32" />
+          <Property Name="Inv_Date" Type="DateTime" Precision="0" />
+          <Property Name="Customer_ID" Type="Int32" />
           <Property Name="Customer_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Customer_Ref" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Item_Type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -531,10 +903,19 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
           <Property Name="Qty_Shipped" Type="Int32" />
           <Property Name="Qty_Invoiced" Type="Int32" />
           <Property Name="Qty_Balance" Type="Int32" />
+          <Property Name="Payment_TermID" Type="Int32" />
+          <Property Name="Quotation_Ref" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Delivery_Date" Type="DateTime" Precision="0" />
+          <Property Name="SalespersonID" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Amount_Ordered" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Amount_Invoiced" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CurrencyID" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Customer_City">
-          <End Role="City" Type="Self.City" Multiplicity="1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <End Type="FopexModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="FopexModel.Customer" Role="Customer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="ID" />
@@ -544,21 +925,21 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Customer_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+        <Association Name="FK_Account_Subcategory_Account_Category">
+          <End Type="FopexModel.Account_Category" Role="Account_Category" Multiplicity="0..1" />
+          <End Type="FopexModel.Account_Subcategory" Role="Account_Subcategory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Country">
+            <Principal Role="Account_Category">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="Country" />
+            <Dependent Role="Account_Subcategory">
+              <PropertyRef Name="Account_CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Item_Item">
-          <End Role="Item" Type="Self.Item" Multiplicity="1" />
-          <End Role="Item1" Type="Self.Item" Multiplicity="0..1" />
+          <End Type="FopexModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="FopexModel.Item" Role="Item1" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Item">
               <PropertyRef Name="ID" />
@@ -568,86 +949,16 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FopexEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="PettyCashForms" EntityType="Self.PettyCashForm" />
-          <EntitySet Name="Branches" EntityType="Self.Branch" />
-          <EntitySet Name="Business_Units" EntityType="Self.Business_Units" />
-          <EntitySet Name="TransactionTypes" EntityType="Self.TransactionType" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="Customer_Type" EntityType="Self.Customer_Type" />
-          <EntitySet Name="Cities" EntityType="Self.City" />
-          <EntitySet Name="Countries" EntityType="Self.Country" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Country1" EntityType="Self.Country1" />
-          <EntitySet Name="GL_Main_Category" EntityType="Self.GL_Main_Category" />
-          <EntitySet Name="LedgerTransactions" EntityType="Self.LedgerTransaction" />
-          <EntitySet Name="Items" EntityType="Self.Item" />
-          <EntitySet Name="ItemTypes" EntityType="Self.ItemType" />
-          <EntitySet Name="UOMs" EntityType="Self.UOM" />
-          <EntitySet Name="SaleInvoices" EntityType="Self.SaleInvoice" />
-          <AssociationSet Name="FK_Customer_City" Association="Self.FK_Customer_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_Country" Association="Self.FK_Customer_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Item_Item" Association="Self.FK_Item_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="Item1" EntitySet="Items" />
-          </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FopexModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FopexModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="TR_GetCountry_SP" ReturnType="Collection(FopexModel.TR_GetCountry_SP_Result)">
-            <Parameter Name="CountryCode" Mode="In" Type="String" />
-          </FunctionImport>
-        </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="TR_GetCountry_SP_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Country_Name" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Country_Code" Nullable="true" MaxLength="100" />
-        </ComplexType>
-      </Schema>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Region_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Region_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Int32" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -656,254 +967,400 @@ warning 6013: The table/view 'Fopex.Sales.Sale' does not have a primary key defi
           <EntitySetMapping Name="PettyCashForms">
             <EntityTypeMapping TypeName="FopexModel.PettyCashForm">
               <MappingFragment StoreEntitySet="PettyCashForm">
-                <ScalarProperty Name="PettyCashID" ColumnName="PettyCashID" />
-                <ScalarProperty Name="CashierName" ColumnName="CashierName" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
-                <ScalarProperty Name="CashType" ColumnName="CashType" />
-                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
-                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
-                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
-                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
-                <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
-                <ScalarProperty Name="Balance" ColumnName="Balance" />
-                <ScalarProperty Name="PhysicalCashinHand" ColumnName="PhysicalCashinHand" />
-                <ScalarProperty Name="CashDifference" ColumnName="CashDifference" />
-                <ScalarProperty Name="GLAccountID" ColumnName="GLAccountID" />
                 <ScalarProperty Name="IOU" ColumnName="IOU" />
+                <ScalarProperty Name="GLAccountID" ColumnName="GLAccountID" />
+                <ScalarProperty Name="CashDifference" ColumnName="CashDifference" />
+                <ScalarProperty Name="PhysicalCashinHand" ColumnName="PhysicalCashinHand" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="ReceiptAmount" ColumnName="ReceiptAmount" />
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="CashType" ColumnName="CashType" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="CashierName" ColumnName="CashierName" />
+                <ScalarProperty Name="PettyCashID" ColumnName="PettyCashID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Branches">
             <EntityTypeMapping TypeName="FopexModel.Branch">
               <MappingFragment StoreEntitySet="Branch">
-                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
-                <ScalarProperty Name="Branch_Code" ColumnName="Branch_Code" />
                 <ScalarProperty Name="Branch_Name" ColumnName="Branch_Name" />
+                <ScalarProperty Name="Branch_Code" ColumnName="Branch_Code" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Business_Units">
             <EntityTypeMapping TypeName="FopexModel.Business_Units">
               <MappingFragment StoreEntitySet="Business_Units">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Business_Unit_Code" ColumnName="Business_Unit_Code" />
                 <ScalarProperty Name="Business_Unit_Description" ColumnName="Business_Unit_Description" />
+                <ScalarProperty Name="Business_Unit_Code" ColumnName="Business_Unit_Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TransactionTypes">
             <EntityTypeMapping TypeName="FopexModel.TransactionType">
               <MappingFragment StoreEntitySet="TransactionType">
-                <ScalarProperty Name="TransTypeID" ColumnName="TransTypeID" />
-                <ScalarProperty Name="TransTypeCode" ColumnName="TransTypeCode" />
                 <ScalarProperty Name="TransTypeDescription" ColumnName="TransTypeDescription" />
+                <ScalarProperty Name="TransTypeCode" ColumnName="TransTypeCode" />
+                <ScalarProperty Name="TransTypeID" ColumnName="TransTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="FopexModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="CustID" ColumnName="CustID" />
-                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
-                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
-                <ScalarProperty Name="AddessLine1" ColumnName="AddessLine1" />
-                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Province" ColumnName="Province" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Contact_Person_Name" ColumnName="Contact_Person_Name" />
-                <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Customer_TypeID" ColumnName="Customer_TypeID" />
-                <ScalarProperty Name="IC_Partner_Code_ID" ColumnName="IC_Partner_Code_ID" />
-                <ScalarProperty Name="Salesperson_ID" ColumnName="Salesperson_ID" />
-                <ScalarProperty Name="Invoicing_Currency" ColumnName="Invoicing_Currency" />
-                <ScalarProperty Name="VAT_Registration_No" ColumnName="VAT_Registration_No" />
-                <ScalarProperty Name="EORI_Number" ColumnName="EORI_Number" />
-                <ScalarProperty Name="GLN" ColumnName="GLN" />
-                <ScalarProperty Name="Bill_To_Customer_Name" ColumnName="Bill_To_Customer_Name" />
-                <ScalarProperty Name="Payment_Term" ColumnName="Payment_Term" />
-                <ScalarProperty Name="Payment_Method" ColumnName="Payment_Method" />
-                <ScalarProperty Name="Exclude_From_Aging_Report" ColumnName="Exclude_From_Aging_Report" />
-                <ScalarProperty Name="Primary_Shipment_To_Location" ColumnName="Primary_Shipment_To_Location" />
-                <ScalarProperty Name="Secondary_Shipment_To_Location" ColumnName="Secondary_Shipment_To_Location" />
-                <ScalarProperty Name="Primary_Shipment_From_Location" ColumnName="Primary_Shipment_From_Location" />
+                <ScalarProperty Name="Assigned_SalespersonID" ColumnName="Assigned_SalespersonID" />
+                <ScalarProperty Name="Assigned_SupervisorID" ColumnName="Assigned_SupervisorID" />
                 <ScalarProperty Name="Secondary_Shipment_From_Location" ColumnName="Secondary_Shipment_From_Location" />
+                <ScalarProperty Name="Primary_Shipment_From_Location" ColumnName="Primary_Shipment_From_Location" />
+                <ScalarProperty Name="Secondary_Shipment_To_Location" ColumnName="Secondary_Shipment_To_Location" />
+                <ScalarProperty Name="Primary_Shipment_To_Location" ColumnName="Primary_Shipment_To_Location" />
+                <ScalarProperty Name="Exclude_From_Aging_Report" ColumnName="Exclude_From_Aging_Report" />
+                <ScalarProperty Name="Payment_Method" ColumnName="Payment_Method" />
+                <ScalarProperty Name="Payment_Term" ColumnName="Payment_Term" />
+                <ScalarProperty Name="Bill_To_Customer_Name" ColumnName="Bill_To_Customer_Name" />
+                <ScalarProperty Name="GLN" ColumnName="GLN" />
+                <ScalarProperty Name="EORI_Number" ColumnName="EORI_Number" />
+                <ScalarProperty Name="VAT_Registration_No" ColumnName="VAT_Registration_No" />
+                <ScalarProperty Name="Invoicing_Currency" ColumnName="Invoicing_Currency" />
+                <ScalarProperty Name="Sales_Region" ColumnName="Sales_Region" />
+                <ScalarProperty Name="Payment_Type_Group_ID" ColumnName="Payment_Type_Group_ID" />
+                <ScalarProperty Name="Customer_Sales_Type_ID" ColumnName="Customer_Sales_Type_ID" />
+                <ScalarProperty Name="Customer_GroupID" ColumnName="Customer_GroupID" />
+                <ScalarProperty Name="Customer_TypeID" ColumnName="Customer_TypeID" />
+                <ScalarProperty Name="Additional_Notes" ColumnName="Additional_Notes" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddessLine1" ColumnName="AddessLine1" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
+                <ScalarProperty Name="Contact_Person_Name" ColumnName="Contact_Person_Name" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customer_Type">
             <EntityTypeMapping TypeName="FopexModel.Customer_Type">
               <MappingFragment StoreEntitySet="Customer_Type">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Customer_Type1" ColumnName="Customer_Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="FopexModel.City">
               <MappingFragment StoreEntitySet="City">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="City_Name" ColumnName="City_Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuotationDetails">
+            <EntityTypeMapping TypeName="FopexModel.QuotationDetail">
+              <MappingFragment StoreEntitySet="QuotationDetail">
+                <ScalarProperty Name="MarginValueAmount" ColumnName="MarginValueAmount" />
+                <ScalarProperty Name="DiscountedValueAmount" ColumnName="DiscountedValueAmount" />
+                <ScalarProperty Name="Update_Date" ColumnName="Update_Date" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="VendorQuotationId" ColumnName="VendorQuotationId" />
+                <ScalarProperty Name="QutationId" ColumnName="QutationId" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="NetAmount" ColumnName="NetAmount" />
+                <ScalarProperty Name="DiscountTypeId" ColumnName="DiscountTypeId" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="GrossPriceAfterMargin" ColumnName="GrossPriceAfterMargin" />
+                <ScalarProperty Name="UnitPriceAfterMargin" ColumnName="UnitPriceAfterMargin" />
+                <ScalarProperty Name="MarginType" ColumnName="MarginType" />
+                <ScalarProperty Name="Margin" ColumnName="Margin" />
+                <ScalarProperty Name="GrossPrice" ColumnName="GrossPrice" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="UOMName" ColumnName="UOMName" />
+                <ScalarProperty Name="UOMId" ColumnName="UOMId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="Serial_No" ColumnName="Serial_No" />
+                <ScalarProperty Name="PartNo" ColumnName="PartNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuotationMasters">
+            <EntityTypeMapping TypeName="FopexModel.QuotationMaster">
+              <MappingFragment StoreEntitySet="QuotationMaster">
+                <ScalarProperty Name="UploadedFileUrl" ColumnName="UploadedFileUrl" />
+                <ScalarProperty Name="NetTotal" ColumnName="NetTotal" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="VersionOf" ColumnName="VersionOf" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="VendorQutationId" ColumnName="VendorQutationId" />
+                <ScalarProperty Name="TermAndConditionId" ColumnName="TermAndConditionId" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
+                <ScalarProperty Name="SpecialNotes" ColumnName="SpecialNotes" />
+                <ScalarProperty Name="PaymnetTernsAndCondition" ColumnName="PaymnetTernsAndCondition" />
+                <ScalarProperty Name="BarCodeImageUlr" ColumnName="BarCodeImageUlr" />
+                <ScalarProperty Name="BarCodeId" ColumnName="BarCodeId" />
+                <ScalarProperty Name="QutationStatus" ColumnName="QutationStatus" />
+                <ScalarProperty Name="CustomDuties" ColumnName="CustomDuties" />
+                <ScalarProperty Name="ImportDuties" ColumnName="ImportDuties" />
+                <ScalarProperty Name="ApplicableDiscount" ColumnName="ApplicableDiscount" />
+                <ScalarProperty Name="GrossTotal" ColumnName="GrossTotal" />
+                <ScalarProperty Name="QutationSentByUserId" ColumnName="QutationSentByUserId" />
+                <ScalarProperty Name="CustomrRepresentativeId" ColumnName="CustomrRepresentativeId" />
+                <ScalarProperty Name="QutationValidity" ColumnName="QutationValidity" />
+                <ScalarProperty Name="QutationDate" ColumnName="QutationDate" />
+                <ScalarProperty Name="QutationSubject" ColumnName="QutationSubject" />
+                <ScalarProperty Name="CustumerId" ColumnName="CustumerId" />
+                <ScalarProperty Name="QRRNo" ColumnName="QRRNo" />
+                <ScalarProperty Name="QutationNo" ColumnName="QutationNo" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="FopexModel.Country">
               <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Country_Name" ColumnName="Country_Name" />
                 <ScalarProperty Name="Country_Code" ColumnName="Country_Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="FopexModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+          <EntitySetMapping Name="Account_Category">
+            <EntityTypeMapping TypeName="FopexModel.Account_Category">
+              <MappingFragment StoreEntitySet="Account_Category">
+                <ScalarProperty Name="Account_Category_Description" ColumnName="Account_Category_Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Country1">
-            <EntityTypeMapping TypeName="FopexModel.Country1">
-              <MappingFragment StoreEntitySet="Country1">
+          <EntitySetMapping Name="Account_Classification">
+            <EntityTypeMapping TypeName="FopexModel.Account_Classification">
+              <MappingFragment StoreEntitySet="Account_Classification">
+                <ScalarProperty Name="Account_SubcategoryID" ColumnName="Account_SubcategoryID" />
+                <ScalarProperty Name="Account_Classification_Description" ColumnName="Account_Classification_Description" />
+                <ScalarProperty Name="Account_Classification_Code" ColumnName="Account_Classification_Code" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Country_Code" ColumnName="Country_Code" />
-                <ScalarProperty Name="Country_Name" ColumnName="Country_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account_Head">
+            <EntityTypeMapping TypeName="FopexModel.Account_Head">
+              <MappingFragment StoreEntitySet="Account_Head">
+                <ScalarProperty Name="Account_SubclassificationID" ColumnName="Account_SubclassificationID" />
+                <ScalarProperty Name="Account_Head_Name" ColumnName="Account_Head_Name" />
+                <ScalarProperty Name="Account_Head_Code" ColumnName="Account_Head_Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Account_Subcategory">
+            <EntityTypeMapping TypeName="FopexModel.Account_Subcategory">
+              <MappingFragment StoreEntitySet="Account_Subcategory">
+                <ScalarProperty Name="Account_CategoryID" ColumnName="Account_CategoryID" />
+                <ScalarProperty Name="Account_Subcategory_Description" ColumnName="Account_Subcategory_Description" />
+                <ScalarProperty Name="Account_Subcategory_Code" ColumnName="Account_Subcategory_Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chart_of_Account">
+            <EntityTypeMapping TypeName="FopexModel.Chart_of_Account">
+              <MappingFragment StoreEntitySet="Chart_of_Account">
+                <ScalarProperty Name="Account_Head_Description" ColumnName="Account_Head_Description" />
+                <ScalarProperty Name="Account_Code" ColumnName="Account_Code" />
+                <ScalarProperty Name="Account_SubclassificationID" ColumnName="Account_SubclassificationID" />
+                <ScalarProperty Name="Account_ClassificationID" ColumnName="Account_ClassificationID" />
+                <ScalarProperty Name="Account_SubcategoryID" ColumnName="Account_SubcategoryID" />
+                <ScalarProperty Name="Account_CategoryID" ColumnName="Account_CategoryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GL_Main_Category">
             <EntityTypeMapping TypeName="FopexModel.GL_Main_Category">
               <MappingFragment StoreEntitySet="GL_Main_Category">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Main_GL_Code" ColumnName="Main_GL_Code" />
                 <ScalarProperty Name="Main_GL_Description" ColumnName="Main_GL_Description" />
+                <ScalarProperty Name="Main_GL_Code" ColumnName="Main_GL_Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GL_Sub_Category_TO_DELETE">
+            <EntityTypeMapping TypeName="FopexModel.GL_Sub_Category_TO_DELETE">
+              <MappingFragment StoreEntitySet="GL_Sub_Category TO DELETE">
+                <ScalarProperty Name="GL_Sub_Category_Description" ColumnName="GL_Sub_Category_Description" />
+                <ScalarProperty Name="GL_Sub_Category_Code" ColumnName="GL_Sub_Category_Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LedgerTransactions">
             <EntityTypeMapping TypeName="FopexModel.LedgerTransaction">
               <MappingFragment StoreEntitySet="LedgerTransactions">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Transaction_ID" ColumnName="Transaction_ID" />
-                <ScalarProperty Name="Transaction_Type" ColumnName="Transaction_Type" />
-                <ScalarProperty Name="Period" ColumnName="Period" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="CostCenter" ColumnName="CostCenter" />
-                <ScalarProperty Name="Code_Level1" ColumnName="Code_Level1" />
-                <ScalarProperty Name="Code_Level2" ColumnName="Code_Level2" />
-                <ScalarProperty Name="Code_Level3" ColumnName="Code_Level3" />
-                <ScalarProperty Name="AmountDebit" ColumnName="AmountDebit" />
                 <ScalarProperty Name="AmountCredit" ColumnName="AmountCredit" />
+                <ScalarProperty Name="AmountDebit" ColumnName="AmountDebit" />
+                <ScalarProperty Name="Code_Level3" ColumnName="Code_Level3" />
+                <ScalarProperty Name="Code_Level2" ColumnName="Code_Level2" />
+                <ScalarProperty Name="Code_Level1" ColumnName="Code_Level1" />
+                <ScalarProperty Name="CostCenter" ColumnName="CostCenter" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="Transaction_Type" ColumnName="Transaction_Type" />
+                <ScalarProperty Name="Transaction_ID" ColumnName="Transaction_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="FopexModel.Item">
               <MappingFragment StoreEntitySet="Item">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Item_No" ColumnName="Item_No" />
-                <ScalarProperty Name="item_Description" ColumnName="item_Description" />
+                <ScalarProperty Name="GLCodeID_CostofSale" ColumnName="GLCodeID_CostofSale" />
+                <ScalarProperty Name="GLCodeID_Inventory" ColumnName="GLCodeID_Inventory" />
+                <ScalarProperty Name="GLCodeID_Sale" ColumnName="GLCodeID_Sale" />
+                <ScalarProperty Name="Qty_Adj" ColumnName="Qty_Adj" />
+                <ScalarProperty Name="Qty_Sold" ColumnName="Qty_Sold" />
+                <ScalarProperty Name="Qty_Available" ColumnName="Qty_Available" />
+                <ScalarProperty Name="Qty_BOM_ID" ColumnName="Qty_BOM_ID" />
+                <ScalarProperty Name="Qty_Prod_Ord_ID" ColumnName="Qty_Prod_Ord_ID" />
+                <ScalarProperty Name="Qty_Sale_Ord_ID" ColumnName="Qty_Sale_Ord_ID" />
+                <ScalarProperty Name="Qty_Purch_Ord_ID" ColumnName="Qty_Purch_Ord_ID" />
+                <ScalarProperty Name="Prod_UOM_ID" ColumnName="Prod_UOM_ID" />
+                <ScalarProperty Name="Sale_UOM_ID" ColumnName="Sale_UOM_ID" />
+                <ScalarProperty Name="Purch_UOM_ID" ColumnName="Purch_UOM_ID" />
+                <ScalarProperty Name="Item_Category_ID" ColumnName="Item_Category_ID" />
+                <ScalarProperty Name="Product_Group_ID" ColumnName="Product_Group_ID" />
+                <ScalarProperty Name="Product_Line_ID" ColumnName="Product_Line_ID" />
+                <ScalarProperty Name="Business_Unit_ID" ColumnName="Business_Unit_ID" />
                 <ScalarProperty Name="UOM_ID" ColumnName="UOM_ID" />
                 <ScalarProperty Name="Item_Type_ID" ColumnName="Item_Type_ID" />
-                <ScalarProperty Name="Purch_UOM_ID" ColumnName="Purch_UOM_ID" />
-                <ScalarProperty Name="Sale_UOM_ID" ColumnName="Sale_UOM_ID" />
-                <ScalarProperty Name="Prod_UOM_ID" ColumnName="Prod_UOM_ID" />
-                <ScalarProperty Name="Qty_Purch_Ord_ID" ColumnName="Qty_Purch_Ord_ID" />
-                <ScalarProperty Name="Qty_Sale_Ord_ID" ColumnName="Qty_Sale_Ord_ID" />
-                <ScalarProperty Name="Qty_Prod_Ord_ID" ColumnName="Qty_Prod_Ord_ID" />
-                <ScalarProperty Name="Qty_BOM_ID" ColumnName="Qty_BOM_ID" />
-                <ScalarProperty Name="Qty_Available" ColumnName="Qty_Available" />
-                <ScalarProperty Name="Qty_Sold" ColumnName="Qty_Sold" />
-                <ScalarProperty Name="Qty_Adj" ColumnName="Qty_Adj" />
-                <ScalarProperty Name="Business_Unit_ID" ColumnName="Business_Unit_ID" />
-                <ScalarProperty Name="Product_Line_ID" ColumnName="Product_Line_ID" />
-                <ScalarProperty Name="Product_Group_ID" ColumnName="Product_Group_ID" />
-                <ScalarProperty Name="Item_Category_ID" ColumnName="Item_Category_ID" />
-                <ScalarProperty Name="GLCodeID_Sale" ColumnName="GLCodeID_Sale" />
-                <ScalarProperty Name="GLCodeID_Inventory" ColumnName="GLCodeID_Inventory" />
-                <ScalarProperty Name="GLCodeID_CostofSale" ColumnName="GLCodeID_CostofSale" />
+                <ScalarProperty Name="item_Description" ColumnName="item_Description" />
+                <ScalarProperty Name="Item_No" ColumnName="Item_No" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item_Ledger">
+            <EntityTypeMapping TypeName="FopexModel.Item_Ledger">
+              <MappingFragment StoreEntitySet="Item_Ledger">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Item_No" ColumnName="Item_No" />
+                <ScalarProperty Name="Transaction_Type" ColumnName="Transaction_Type" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Transaction_No" ColumnName="Transaction_No" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ItemTypes">
             <EntityTypeMapping TypeName="FopexModel.ItemType">
               <MappingFragment StoreEntitySet="ItemType">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Item_Type_Code" ColumnName="Item_Type_Code" />
                 <ScalarProperty Name="Item_Type_Description" ColumnName="Item_Type_Description" />
+                <ScalarProperty Name="Item_Type_Code" ColumnName="Item_Type_Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Main_Variant">
+            <EntityTypeMapping TypeName="FopexModel.Main_Variant">
+              <MappingFragment StoreEntitySet="Main_Variant">
+                <ScalarProperty Name="Variant_Name" ColumnName="Variant_Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UOMs">
             <EntityTypeMapping TypeName="FopexModel.UOM">
               <MappingFragment StoreEntitySet="UOM">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="UOM_ID" ColumnName="UOM_ID" />
                 <ScalarProperty Name="UOM_Description" ColumnName="UOM_Description" />
+                <ScalarProperty Name="UOM_ID" ColumnName="UOM_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Variants">
+            <EntityTypeMapping TypeName="FopexModel.Variant">
+              <MappingFragment StoreEntitySet="Variants">
+                <ScalarProperty Name="Varian_Name" ColumnName="Varian_Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="FopexModel.Sale">
+              <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="Qty_Balance" ColumnName="Qty_Balance" />
+                <ScalarProperty Name="Qty_Invoiced" ColumnName="Qty_Invoiced" />
+                <ScalarProperty Name="Qty_Shipped" ColumnName="Qty_Shipped" />
+                <ScalarProperty Name="Qty_Ordered" ColumnName="Qty_Ordered" />
+                <ScalarProperty Name="Item_Description" ColumnName="Item_Description" />
+                <ScalarProperty Name="Item_No" ColumnName="Item_No" />
+                <ScalarProperty Name="Item_TypeID" ColumnName="Item_TypeID" />
+                <ScalarProperty Name="Customer_Ref" ColumnName="Customer_Ref" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+                <ScalarProperty Name="Invoice_No" ColumnName="Invoice_No" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SaleInvoices">
             <EntityTypeMapping TypeName="FopexModel.SaleInvoice">
               <MappingFragment StoreEntitySet="SaleInvoice">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Invoice_No" ColumnName="Invoice_No" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="CustID" ColumnName="CustID" />
-                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
-                <ScalarProperty Name="Customer_Ref" ColumnName="Customer_Ref" />
-                <ScalarProperty Name="Item_Type" ColumnName="Item_Type" />
-                <ScalarProperty Name="Item_No" ColumnName="Item_No" />
-                <ScalarProperty Name="Item_Description" ColumnName="Item_Description" />
-                <ScalarProperty Name="Qty_Ordered" ColumnName="Qty_Ordered" />
-                <ScalarProperty Name="Qty_Shipped" ColumnName="Qty_Shipped" />
-                <ScalarProperty Name="Qty_Invoiced" ColumnName="Qty_Invoiced" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+                <ScalarProperty Name="Amount_Invoiced" ColumnName="Amount_Invoiced" />
+                <ScalarProperty Name="Amount_Ordered" ColumnName="Amount_Ordered" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SalespersonID" ColumnName="SalespersonID" />
+                <ScalarProperty Name="Delivery_Date" ColumnName="Delivery_Date" />
+                <ScalarProperty Name="Quotation_Ref" ColumnName="Quotation_Ref" />
+                <ScalarProperty Name="Payment_TermID" ColumnName="Payment_TermID" />
                 <ScalarProperty Name="Qty_Balance" ColumnName="Qty_Balance" />
+                <ScalarProperty Name="Qty_Invoiced" ColumnName="Qty_Invoiced" />
+                <ScalarProperty Name="Qty_Shipped" ColumnName="Qty_Shipped" />
+                <ScalarProperty Name="Qty_Ordered" ColumnName="Qty_Ordered" />
+                <ScalarProperty Name="Item_Description" ColumnName="Item_Description" />
+                <ScalarProperty Name="Item_No" ColumnName="Item_No" />
+                <ScalarProperty Name="Item_Type" ColumnName="Item_Type" />
+                <ScalarProperty Name="Customer_Ref" ColumnName="Customer_Ref" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="Inv_Date" ColumnName="Inv_Date" />
+                <ScalarProperty Name="Invoice_No" ColumnName="Invoice_No" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="FopexModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="FopexModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="FopexModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="FopexModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="FopexModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="FopexModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="FopexModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="FopexModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Region_Code" ColumnName="Region_Code" />
+                <ScalarProperty Name="Region_Name" ColumnName="Region_Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="FopexModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="FopexModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="TR_GetCountry_SP" FunctionName="FopexModel.Store.TR_GetCountry_SP">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="FopexModel.TR_GetCountry_SP_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Country_Name" ColumnName="Country_Name" />
-                <ScalarProperty Name="Country_Code" ColumnName="Country_Code" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
