@@ -85,6 +85,12 @@
           <Property Name="Secondary_Shipment_From_Location" Type="nvarchar" MaxLength="50" />
           <Property Name="Assigned_SupervisorID" Type="int" />
           <Property Name="Assigned_SalespersonID" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDelete" Type="bit" />
         </EntityType>
         <EntityType Name="Customer_Type">
           <Key>
@@ -494,7 +500,6 @@
           <EntitySet Name="Branches" EntityType="FopexModel.Branch" />
           <EntitySet Name="Business_Units" EntityType="FopexModel.Business_Units" />
           <EntitySet Name="TransactionTypes" EntityType="FopexModel.TransactionType" />
-          <EntitySet Name="Customers" EntityType="FopexModel.Customer" />
           <EntitySet Name="Customer_Type" EntityType="FopexModel.Customer_Type" />
           <EntitySet Name="Cities" EntityType="FopexModel.City" />
           <EntitySet Name="QuotationDetails" EntityType="FopexModel.QuotationDetail" />
@@ -516,10 +521,6 @@
           <EntitySet Name="Variants" EntityType="FopexModel.Variant" />
           <EntitySet Name="Sales" EntityType="FopexModel.Sale" />
           <EntitySet Name="SaleInvoices" EntityType="FopexModel.SaleInvoice" />
-          <AssociationSet Name="FK_Customer_City" Association="FopexModel.FK_Customer_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
           <AssociationSet Name="FK_Account_Subcategory_Account_Category" Association="FopexModel.FK_Account_Subcategory_Account_Category">
             <End Role="Account_Category" EntitySet="Account_Category" />
             <End Role="Account_Subcategory" EntitySet="Account_Subcategory" />
@@ -529,6 +530,11 @@
             <End Role="Item1" EntitySet="Items" />
           </AssociationSet>
           <EntitySet Name="Regions" EntityType="FopexModel.Region" />
+          <EntitySet Name="Customers" EntityType="FopexModel.Customer" />
+          <AssociationSet Name="FK_Customer_City" Association="FopexModel.FK_Customer_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -589,44 +595,6 @@
           <Property Name="TransTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TransTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TransTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="CustID" />
-          </Key>
-          <Property Name="CustID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Customer_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Contact_Person_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AddessLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AddressLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="Int32" />
-          <Property Name="City" Type="Int32" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Additional_Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Customer_TypeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Customer_GroupID" Type="Int32" />
-          <Property Name="Customer_Sales_Type_ID" Type="Int32" />
-          <Property Name="Payment_Type_Group_ID" Type="Int32" />
-          <Property Name="Sales_Region" Type="Int32" />
-          <Property Name="Invoicing_Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="VAT_Registration_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EORI_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GLN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Bill_To_Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Payment_Term" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Payment_Method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Exclude_From_Aging_Report" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Primary_Shipment_To_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Secondary_Shipment_To_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Primary_Shipment_From_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Secondary_Shipment_From_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Assigned_SupervisorID" Type="Int32" />
-          <Property Name="Assigned_SalespersonID" Type="Int32" />
-          <NavigationProperty Name="City1" Relationship="FopexModel.FK_Customer_City" FromRole="Customer" ToRole="City" />
         </EntityType>
         <EntityType Name="Customer_Type">
           <Key>
@@ -913,18 +881,6 @@
           <Property Name="CurrencyID" Type="Int32" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK_Customer_City">
-          <End Type="FopexModel.City" Role="City" Multiplicity="0..1" />
-          <End Type="FopexModel.Customer" Role="Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="City" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Account_Subcategory_Account_Category">
           <End Type="FopexModel.Account_Category" Role="Account_Category" Multiplicity="0..1" />
           <End Type="FopexModel.Account_Subcategory" Role="Account_Subcategory" Multiplicity="*" />
@@ -958,6 +914,62 @@
           <Property Name="Region_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Int32" />
         </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_Person_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AddessLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="Int32" />
+          <Property Name="City" Type="Int32" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Additional_Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_TypeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_GroupID" Type="Int32" />
+          <Property Name="Customer_Sales_Type_ID" Type="Int32" />
+          <Property Name="Payment_Type_Group_ID" Type="Int32" />
+          <Property Name="Sales_Region" Type="Int32" />
+          <Property Name="Invoicing_Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VAT_Registration_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EORI_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GLN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bill_To_Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Payment_Term" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Payment_Method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Exclude_From_Aging_Report" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Primary_Shipment_To_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Secondary_Shipment_To_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Primary_Shipment_From_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Secondary_Shipment_From_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Assigned_SupervisorID" Type="Int32" />
+          <Property Name="Assigned_SalespersonID" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="City1" Relationship="FopexModel.FK_Customer_City" FromRole="Customer" ToRole="City" />
+        </EntityType>
+        <Association Name="FK_Customer_City">
+          <End Type="FopexModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="FopexModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1009,44 +1021,6 @@
                 <ScalarProperty Name="TransTypeDescription" ColumnName="TransTypeDescription" />
                 <ScalarProperty Name="TransTypeCode" ColumnName="TransTypeCode" />
                 <ScalarProperty Name="TransTypeID" ColumnName="TransTypeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="FopexModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="Assigned_SalespersonID" ColumnName="Assigned_SalespersonID" />
-                <ScalarProperty Name="Assigned_SupervisorID" ColumnName="Assigned_SupervisorID" />
-                <ScalarProperty Name="Secondary_Shipment_From_Location" ColumnName="Secondary_Shipment_From_Location" />
-                <ScalarProperty Name="Primary_Shipment_From_Location" ColumnName="Primary_Shipment_From_Location" />
-                <ScalarProperty Name="Secondary_Shipment_To_Location" ColumnName="Secondary_Shipment_To_Location" />
-                <ScalarProperty Name="Primary_Shipment_To_Location" ColumnName="Primary_Shipment_To_Location" />
-                <ScalarProperty Name="Exclude_From_Aging_Report" ColumnName="Exclude_From_Aging_Report" />
-                <ScalarProperty Name="Payment_Method" ColumnName="Payment_Method" />
-                <ScalarProperty Name="Payment_Term" ColumnName="Payment_Term" />
-                <ScalarProperty Name="Bill_To_Customer_Name" ColumnName="Bill_To_Customer_Name" />
-                <ScalarProperty Name="GLN" ColumnName="GLN" />
-                <ScalarProperty Name="EORI_Number" ColumnName="EORI_Number" />
-                <ScalarProperty Name="VAT_Registration_No" ColumnName="VAT_Registration_No" />
-                <ScalarProperty Name="Invoicing_Currency" ColumnName="Invoicing_Currency" />
-                <ScalarProperty Name="Sales_Region" ColumnName="Sales_Region" />
-                <ScalarProperty Name="Payment_Type_Group_ID" ColumnName="Payment_Type_Group_ID" />
-                <ScalarProperty Name="Customer_Sales_Type_ID" ColumnName="Customer_Sales_Type_ID" />
-                <ScalarProperty Name="Customer_GroupID" ColumnName="Customer_GroupID" />
-                <ScalarProperty Name="Customer_TypeID" ColumnName="Customer_TypeID" />
-                <ScalarProperty Name="Additional_Notes" ColumnName="Additional_Notes" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-                <ScalarProperty Name="AddessLine1" ColumnName="AddessLine1" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
-                <ScalarProperty Name="Contact_Person_Name" ColumnName="Contact_Person_Name" />
-                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
-                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
-                <ScalarProperty Name="CustID" ColumnName="CustID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1358,6 +1332,50 @@
                 <ScalarProperty Name="Region_Code" ColumnName="Region_Code" />
                 <ScalarProperty Name="Region_Name" ColumnName="Region_Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="FopexModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="Assigned_SalespersonID" ColumnName="Assigned_SalespersonID" />
+                <ScalarProperty Name="Assigned_SupervisorID" ColumnName="Assigned_SupervisorID" />
+                <ScalarProperty Name="Secondary_Shipment_From_Location" ColumnName="Secondary_Shipment_From_Location" />
+                <ScalarProperty Name="Primary_Shipment_From_Location" ColumnName="Primary_Shipment_From_Location" />
+                <ScalarProperty Name="Secondary_Shipment_To_Location" ColumnName="Secondary_Shipment_To_Location" />
+                <ScalarProperty Name="Primary_Shipment_To_Location" ColumnName="Primary_Shipment_To_Location" />
+                <ScalarProperty Name="Exclude_From_Aging_Report" ColumnName="Exclude_From_Aging_Report" />
+                <ScalarProperty Name="Payment_Method" ColumnName="Payment_Method" />
+                <ScalarProperty Name="Payment_Term" ColumnName="Payment_Term" />
+                <ScalarProperty Name="Bill_To_Customer_Name" ColumnName="Bill_To_Customer_Name" />
+                <ScalarProperty Name="GLN" ColumnName="GLN" />
+                <ScalarProperty Name="EORI_Number" ColumnName="EORI_Number" />
+                <ScalarProperty Name="VAT_Registration_No" ColumnName="VAT_Registration_No" />
+                <ScalarProperty Name="Invoicing_Currency" ColumnName="Invoicing_Currency" />
+                <ScalarProperty Name="Sales_Region" ColumnName="Sales_Region" />
+                <ScalarProperty Name="Payment_Type_Group_ID" ColumnName="Payment_Type_Group_ID" />
+                <ScalarProperty Name="Customer_Sales_Type_ID" ColumnName="Customer_Sales_Type_ID" />
+                <ScalarProperty Name="Customer_GroupID" ColumnName="Customer_GroupID" />
+                <ScalarProperty Name="Customer_TypeID" ColumnName="Customer_TypeID" />
+                <ScalarProperty Name="Additional_Notes" ColumnName="Additional_Notes" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddessLine1" ColumnName="AddessLine1" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
+                <ScalarProperty Name="Contact_Person_Name" ColumnName="Contact_Person_Name" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

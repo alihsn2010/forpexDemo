@@ -91,7 +91,15 @@ namespace Fopex.DAL.Model.Customer
         [DisplayName("Assigned_SalespersonID")]
         public Nullable<int> Assigned_SalespersonID { get; set; }
 
-       // public virtual City City1 { get; set; }
+        public Nullable<int> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedOn { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
+        public string Last_Name { get; set; }
+
+        // public virtual City City1 { get; set; }
 
 
 

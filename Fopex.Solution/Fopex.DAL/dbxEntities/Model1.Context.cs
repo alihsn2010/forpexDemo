@@ -32,7 +32,6 @@ namespace Fopex.DAL.dbxEntities
         public DbSet<Branch> Branches { get; set; }
         public DbSet<Business_Units> Business_Units { get; set; }
         public DbSet<TransactionType> TransactionTypes { get; set; }
-        public DbSet<Customer> Customers { get; set; }
         public DbSet<Customer_Type> Customer_Type { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<QuotationDetail> QuotationDetails { get; set; }
@@ -55,6 +54,7 @@ namespace Fopex.DAL.dbxEntities
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleInvoice> SaleInvoices { get; set; }
         public DbSet<Region> Regions { get; set; }
+        public DbSet<Customer> Customers { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

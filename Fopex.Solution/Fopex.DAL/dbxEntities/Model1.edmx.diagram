@@ -4,12 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7148a84aee35404b835807468707f3ef" Name="Diagram1" ZoomLevel="53">
+      <Diagram DiagramId="7148a84aee35404b835807468707f3ef" Name="Diagram1" ZoomLevel="27">
         <EntityTypeShape EntityType="FopexModel.PettyCashForm" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="FopexModel.Branch" Width="1.5" PointX="7.75" PointY="5.75" />
         <EntityTypeShape EntityType="FopexModel.Business_Units" Width="1.5" PointX="7.75" PointY="8.75" />
         <EntityTypeShape EntityType="FopexModel.TransactionType" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FopexModel.Customer" Width="1.5" PointX="5" PointY="4.25" />
         <EntityTypeShape EntityType="FopexModel.Customer_Type" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="FopexModel.City" Width="1.5" PointX="2.75" PointY="7.125" />
         <EntityTypeShape EntityType="FopexModel.QuotationDetail" Width="1.5" PointX="9.75" PointY="3.75" />
@@ -31,10 +30,11 @@
         <EntityTypeShape EntityType="FopexModel.Variant" Width="1.5" PointX="13.75" PointY="12.75" />
         <EntityTypeShape EntityType="FopexModel.Sale" Width="1.5" PointX="6.75" PointY="14.75" />
         <EntityTypeShape EntityType="FopexModel.SaleInvoice" Width="1.5" PointX="8.75" PointY="14.75" />
-        <AssociationConnector Association="FopexModel.FK_Customer_City" />
         <AssociationConnector Association="FopexModel.FK_Account_Subcategory_Account_Category" />
         <AssociationConnector Association="FopexModel.FK_Item_Item" />
         <EntityTypeShape EntityType="FopexModel.Region" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="FopexModel.Customer" Width="1.5" PointX="5" PointY="18.625" />
+        <AssociationConnector Association="FopexModel.FK_Customer_City" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

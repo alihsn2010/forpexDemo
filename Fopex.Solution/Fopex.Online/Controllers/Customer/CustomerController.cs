@@ -7,6 +7,7 @@ using System.Data;
 
 using Fopex.BAL.Areas.Customer;
 using Fopex.DAL.Model.Customer;
+using Fopex.COMMON.Helper;
 
 namespace Fopex.Online.Controllers.Customer
 {
@@ -14,32 +15,14 @@ namespace Fopex.Online.Controllers.Customer
     public class CustomerController : Controller
     {
 
-        //  Models.Customer.FopexEntities db = new Models.Customer.FopexEntities();
-
-
-
-
         // GET: Customer
         public ActionResult Index()
         {
-            //List<Customers> customerslist = db.customers.ToList<Customers>();
-            //return Json(new { data = customerslist }, JsonRequestBehavior.AllowGet);
-
-            // return View(db.customers.ToList());
-
             List<mCustomer> lst = new List<mCustomer>();
             BOCustomer obj = new BOCustomer();
             lst = obj.BOGetCustomer();
-
-
             return View(lst.ToList());
         }
-
-
-
-
-
-
 
         // GET: Customer/Details/5
         //public ActionResult Details(int CustID)
@@ -66,24 +49,6 @@ namespace Fopex.Online.Controllers.Customer
                 var getRegionlist = objBOCustomer.ddlGetRegion();
                 var ddlregionlist = new SelectList(getRegionlist.ToList(), "ID", "Region_Name");
                 ViewBag.vbRegion = ddlregionlist;
-
-
-
-
-
-
-
-                //var mylist = cshparpEntity.itemtypes.ToList();
-                //    var fromDatabaseEF = new SelectList(mylist.ToList(), "ID", "Item_Type_Code");
-                //    ViewBag.MySkills = fromDatabaseEF;
-
-
-
-
-
-
-
-
 
                 return true;
 
@@ -114,7 +79,6 @@ namespace Fopex.Online.Controllers.Customer
         //}
 
 
-
         // POST: Customer/Create
         [HttpPost]
         public ActionResult Create(mCustomer customers)
@@ -130,9 +94,9 @@ namespace Fopex.Online.Controllers.Customer
         }
 
 
-
+        
         // GET: Customer/Edit/5
-        public ActionResult Edit(int CustID)
+        public ActionResult Update(mCustomer mCustome)
         {
             //Customers customers = db.customers.Find(CustID);
             //if (customers == null)
@@ -140,40 +104,71 @@ namespace Fopex.Online.Controllers.Customer
             //    HttpNotFound();
             //}
             // return View(customers);
-
-            return View();
+            bool result = BindDropDown();
+            return View(mCustome);
         }
 
-        // POST: Customer/Edit/5
-        //[HttpPost]
-        //public ActionResult Edit(int CustID, Customers customers)
-        //{
-        //    //try
-        //    //{
-        //    //    if (ModelState.IsValid)
-        //    //    {
-        //    //        db.Entry(customers).State = EntityState.Modified;
-        //    //        db.SaveChanges();
-        //    //    }
 
-        //    //    return RedirectToAction("Index");
-        //    //}
-        //    //catch
-        //    //{
-        //    //    return View();
-        //    //}
-        //}
+
+
+
+
+        //POST: Customer/Edit/5
+        //[HttpPost]
+        public ActionResult Edit(int CustID,string objAction)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    BOCustomer BOCustomer = new BOCustomer();
+                    mCustomer modelCustomer = new mCustomer();
+
+                    if (objAction == PageAction.View)
+                    {
+                        modelCustomer = BOCustomer.BOGetCustomerbyID(CustID);
+                        bool result = BindDropDown();
+
+                        return View("Update", modelCustomer);
+                    }
+                    if (objAction == PageAction.Edit)
+                    {
+                        return RedirectToAction("Index");
+                        //db.Entry(customers).State = EntityState.Modified;
+                        //db.SaveChanges();
+                    }
+                   // return RedirectToAction("Index");
+                }
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
         // GET: Customer/Delete/5
-        public ActionResult Delete(int CustID)
+        public ActionResult Delete(long CustID)
         {
-            //Customers customers = db.customers.Find(CustID);
-            //if (customers == null)
-            //{
-            //    HttpNotFound();
-            //}
-            //return View(customers);
+            bool result = false;
+            if (ModelState.IsValid)
+            {
 
+                BOCustomer oCustomer = new BOCustomer();
+                result = oCustomer.BODeleteCustomer(CustID);
+
+                if (result)
+                {
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    //ModelState.AddModelError("Sucess", "Data Save Sucessfully");
+                    return View();
+                }
+
+            }
             return View();
         }
 

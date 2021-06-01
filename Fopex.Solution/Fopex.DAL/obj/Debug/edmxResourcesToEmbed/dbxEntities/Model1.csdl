@@ -38,7 +38,6 @@
     <EntitySet Name="Branches" EntityType="FopexModel.Branch" />
     <EntitySet Name="Business_Units" EntityType="FopexModel.Business_Units" />
     <EntitySet Name="TransactionTypes" EntityType="FopexModel.TransactionType" />
-    <EntitySet Name="Customers" EntityType="FopexModel.Customer" />
     <EntitySet Name="Customer_Type" EntityType="FopexModel.Customer_Type" />
     <EntitySet Name="Cities" EntityType="FopexModel.City" />
     <EntitySet Name="QuotationDetails" EntityType="FopexModel.QuotationDetail" />
@@ -60,10 +59,6 @@
     <EntitySet Name="Variants" EntityType="FopexModel.Variant" />
     <EntitySet Name="Sales" EntityType="FopexModel.Sale" />
     <EntitySet Name="SaleInvoices" EntityType="FopexModel.SaleInvoice" />
-    <AssociationSet Name="FK_Customer_City" Association="FopexModel.FK_Customer_City">
-      <End Role="City" EntitySet="Cities" />
-      <End Role="Customer" EntitySet="Customers" />
-    </AssociationSet>
     <AssociationSet Name="FK_Account_Subcategory_Account_Category" Association="FopexModel.FK_Account_Subcategory_Account_Category">
       <End Role="Account_Category" EntitySet="Account_Category" />
       <End Role="Account_Subcategory" EntitySet="Account_Subcategory" />
@@ -73,6 +68,11 @@
       <End Role="Item1" EntitySet="Items" />
     </AssociationSet>
     <EntitySet Name="Regions" EntityType="FopexModel.Region" />
+    <EntitySet Name="Customers" EntityType="FopexModel.Customer" />
+    <AssociationSet Name="FK_Customer_City" Association="FopexModel.FK_Customer_City">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -133,44 +133,6 @@
     <Property Name="TransTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TransTypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="TransTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="Customer">
-    <Key>
-      <PropertyRef Name="CustID" />
-    </Key>
-    <Property Name="CustID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Customer_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Contact_Person_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Phone_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="AddessLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="AddressLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Country" Type="Int32" />
-    <Property Name="City" Type="Int32" />
-    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Additional_Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Customer_TypeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Customer_GroupID" Type="Int32" />
-    <Property Name="Customer_Sales_Type_ID" Type="Int32" />
-    <Property Name="Payment_Type_Group_ID" Type="Int32" />
-    <Property Name="Sales_Region" Type="Int32" />
-    <Property Name="Invoicing_Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="VAT_Registration_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="EORI_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="GLN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Bill_To_Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Payment_Term" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Payment_Method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Exclude_From_Aging_Report" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Primary_Shipment_To_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Secondary_Shipment_To_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Primary_Shipment_From_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Secondary_Shipment_From_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Assigned_SupervisorID" Type="Int32" />
-    <Property Name="Assigned_SalespersonID" Type="Int32" />
-    <NavigationProperty Name="City1" Relationship="FopexModel.FK_Customer_City" FromRole="Customer" ToRole="City" />
   </EntityType>
   <EntityType Name="Customer_Type">
     <Key>
@@ -457,18 +419,6 @@
     <Property Name="CurrencyID" Type="Int32" />
     <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
-  <Association Name="FK_Customer_City">
-    <End Type="FopexModel.City" Role="City" Multiplicity="0..1" />
-    <End Type="FopexModel.Customer" Role="Customer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="City">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Customer">
-        <PropertyRef Name="City" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Account_Subcategory_Account_Category">
     <End Type="FopexModel.Account_Category" Role="Account_Category" Multiplicity="0..1" />
     <End Type="FopexModel.Account_Subcategory" Role="Account_Subcategory" Multiplicity="*" />
@@ -502,4 +452,60 @@
     <Property Name="Region_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="IsActive" Type="Int32" />
   </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustID" />
+    </Key>
+    <Property Name="CustID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customer_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Person_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddessLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="Int32" />
+    <Property Name="City" Type="Int32" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Additional_Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Customer_TypeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Customer_GroupID" Type="Int32" />
+    <Property Name="Customer_Sales_Type_ID" Type="Int32" />
+    <Property Name="Payment_Type_Group_ID" Type="Int32" />
+    <Property Name="Sales_Region" Type="Int32" />
+    <Property Name="Invoicing_Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VAT_Registration_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EORI_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GLN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Bill_To_Customer_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Payment_Term" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Payment_Method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Exclude_From_Aging_Report" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Primary_Shipment_To_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Secondary_Shipment_To_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Primary_Shipment_From_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Secondary_Shipment_From_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Assigned_SupervisorID" Type="Int32" />
+    <Property Name="Assigned_SalespersonID" Type="Int32" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsDelete" Type="Boolean" />
+    <NavigationProperty Name="City1" Relationship="FopexModel.FK_Customer_City" FromRole="Customer" ToRole="City" />
+  </EntityType>
+  <Association Name="FK_Customer_City">
+    <End Type="FopexModel.City" Role="City" Multiplicity="0..1" />
+    <End Type="FopexModel.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

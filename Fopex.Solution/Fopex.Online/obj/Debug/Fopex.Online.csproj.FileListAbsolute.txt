@@ -190,7 +190,6 @@ D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Online\o
 D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Online\obj\Debug\Fopex.Online.csproj.CopyComplete
 D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Online\obj\Debug\Fopex.Online.dll
 D:\LocalGit\forpexDemo\FopexSolution\FopexSolution\Fopex.Solution\Fopex.Online\obj\Debug\Fopex.Online.pdb
-D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Online\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Online\bin\Fopex.Online.dll.config
 D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Online\bin\Fopex.Online.dll
 D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Online\bin\Fopex.Online.pdb
@@ -205,6 +204,7 @@ D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Online\bin\roslyn\Microsoft.CodeAnal
 D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Online\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
 D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Online\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Online\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Online\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Online\bin\roslyn\Microsoft.CSharp.Core.targets
 D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Online\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 D:\LocalGit\forpexDemo\Fopex.Solution\Fopex.Online\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll

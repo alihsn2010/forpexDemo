@@ -80,6 +80,12 @@
     <Property Name="Secondary_Shipment_From_Location" Type="nvarchar" MaxLength="50" />
     <Property Name="Assigned_SupervisorID" Type="int" />
     <Property Name="Assigned_SalespersonID" Type="int" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsDelete" Type="bit" />
   </EntityType>
   <EntityType Name="Customer_Type">
     <Key>

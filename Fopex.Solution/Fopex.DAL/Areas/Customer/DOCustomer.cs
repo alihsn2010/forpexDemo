@@ -12,12 +12,6 @@ namespace Fopex.DAL.Areas.Customer
     {
         public List<mCustomer> GetAll()
         {
-            //CityList = new List<mCity>();
-            //dbxEntities.City objCity = new dbxEntities.City();
-
-            //using (FopexEntities1 db = new FopexEntities1())
-
-
 
             using (FopexEntities1 db = new FopexEntities1())
             {
@@ -68,7 +62,10 @@ namespace Fopex.DAL.Areas.Customer
                             ModelCustomer.Region = cus.Region;
                             ModelCustomer.State = cus.State;
                             ModelCustomer.VAT_Registration_No = cus.VAT_Registration_No;
-
+                            ModelCustomer.IsActive = cus.IsActive;
+                            ModelCustomer.CreatedBy = cus.CreatedBy;
+                            ModelCustomer.CreatedOn = cus.CreatedOn;
+                            ModelCustomer.IsDelete = cus.IsDelete;
                             CustomersList.Add(ModelCustomer);
 
                         }
@@ -85,10 +82,49 @@ namespace Fopex.DAL.Areas.Customer
             }
         }
 
+        public mCustomer GetByID(long ID)
+        {
+            try
+            {
+
+                using (FopexEntities1 db = new FopexEntities1())
+                {
+
+
+                    var query = db.Customers.Where(a => a.CustID == ID).FirstOrDefault();
+                    if (query != null)
+                    {
+                        mCustomer objCustomer = new mCustomer();
+                        objCustomer.CustID = query.CustID;
+                        objCustomer.Customer_ID = query.Customer_ID;
+                        objCustomer.Customer_Name = query.Customer_Name;
+                        objCustomer.Email = query.Email;
+                        objCustomer.Phone_No = query.Phone_No;
+                        objCustomer.City = query.City;
+                        objCustomer.Country = query.Country;
+                        objCustomer.Region = query.Region;
+                        objCustomer.IsActive = query.IsActive;
+                        objCustomer.CreatedBy = query.CreatedBy;
+                        objCustomer.CreatedOn = query.CreatedOn;
+                        return objCustomer;
+                    }
+
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                //
+                return null;
+
+            }
+          
+        }
+
 
         List<mCustomer> CusList;
 
-        public long AddNewCustomer(mCustomer objCustomer)
+        public long Add(mCustomer objCustomer)
         {
 
             FopexEntities1 dd = new FopexEntities1();
@@ -98,13 +134,13 @@ namespace Fopex.DAL.Areas.Customer
             {
                 long flag = 0;
 
-           
+
                 var modelCust = new Fopex.DAL.dbxEntities.Customer();
                 try
                 {
 
 
-                   
+
                     if (objCustomer != null)
                     {
                         modelCust.Customer_ID = objCustomer.Customer_ID;
@@ -114,6 +150,9 @@ namespace Fopex.DAL.Areas.Customer
                         modelCust.City = objCustomer.City;
                         modelCust.Country = objCustomer.Country;
                         modelCust.Region = objCustomer.Region;
+                        modelCust.IsActive = objCustomer.IsActive;
+                        modelCust.CreatedBy = objCustomer.CreatedBy;
+                        modelCust.CreatedOn = objCustomer.CreatedOn;
 
                         db.Customers.Add(modelCust);
                         db.SaveChanges();
@@ -135,21 +174,51 @@ namespace Fopex.DAL.Areas.Customer
 
 
 
-
-
-        public mCustomer UpdateCustomer(mCustomer objCustomer)
+        public mCustomer Update(mCustomer objCustomer)
         {
+            //check if Edit then Action
+            if (true)
+            {
 
+            }
+            // if view detaisl 
+            if (true)
+            {
 
+            }
+            else
+            {
+
+            }
             return null;
 
         }
 
-        public mCustomer DeleteCustomer(int CustomerID)
+        public bool Delete(long ID)
         {
+            bool IsDeleted = false;
+            using (FopexEntities1 db = new FopexEntities1())
+            {
+                try
+                {
+                    Fopex.DAL.dbxEntities.Customer query = new Fopex.DAL.dbxEntities.Customer();
 
 
-            return null;
+                    query = db.Customers.Where(c => c.CustID == ID).FirstOrDefault();
+                    if (query != null)
+                    {
+                        db.Customers.Remove(query);
+                        db.SaveChanges();
+                        IsDeleted = true;
+                    }
+                }
+                catch
+                {
+                    IsDeleted = false;
+                }
+                return IsDeleted;
+            }
+
 
         }
 

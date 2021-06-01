@@ -18,14 +18,14 @@ namespace Fopex.BAL.Areas.Customer
     {
         #region bind Dropdownlist
 
-       public List<mCity> ddlGetCity()
+        public List<mCity> ddlGetCity()
         {
 
             DOCity objCity = new DOCity();
             var result = objCity.GetAllActive();
-           
-            return result; 
-           
+
+            return result;
+
         }
 
         public List<mCountry> ddlGetCountry()
@@ -38,7 +38,6 @@ namespace Fopex.BAL.Areas.Customer
 
         }
 
-
         public List<mRegion> ddlGetRegion()
         {
 
@@ -48,8 +47,6 @@ namespace Fopex.BAL.Areas.Customer
             return result;
 
         }
-
-
 
         //public List<mCity> itemtypesDropDown()
         //{
@@ -95,7 +92,40 @@ namespace Fopex.BAL.Areas.Customer
                 }
 
 
-                
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+
+            }
+        }
+
+
+        public mCustomer BOGetCustomerbyID(long CustomerID)
+        {
+            try
+            {
+              
+                DOCustomer objCustomer = new DOCustomer();
+                mCustomer objModelCustomer = new mCustomer();
+                objModelCustomer = objCustomer.GetByID(CustomerID);
+                if (objModelCustomer != null)
+                {
+                    //var json = JsonConvert.SerializeObject(dtResultSet, Formatting.None);
+                    //var ReturnResult = JsonConvert.DeserializeObject<List<mCity>>(json);
+                    return objModelCustomer;
+                }
+                else
+                {
+                    return null;
+                }
+
+
+
             }
             catch (Exception ex)
             {
@@ -121,11 +151,23 @@ namespace Fopex.BAL.Areas.Customer
 
                 mCustomer objModelCustomer = new mCustomer();
                 DOCustomer doCustomer = new DOCustomer();
-                if (objCust != null )
-                {
-                    result = doCustomer.AddNewCustomer(objCust);
-                }
+                //DOItem doitem = new DOItem();
                 
+                if (objCust != null)
+                {
+                    // create customer  
+                    result = doCustomer.Add(objCust);
+
+                    // vendor customer id > plus items from item table 
+                    // cust :149 
+                    // item get all item  doitem.getitem();
+                    
+
+                    // add customer company detail
+
+                    // item detail 
+                }
+
                 if (result != null)
                 {
                     //var json = JsonConvert.SerializeObject(dtResultSet, Formatting.None);
@@ -152,11 +194,80 @@ namespace Fopex.BAL.Areas.Customer
 
         #endregion
 
-        #region  Edit
+        #region  Update
+        public bool BOUpdateCustomer(mCustomer customers)
+        {
+            try
+            {
+                bool result = false;
+                DOCustomer obj = new DOCustomer();
+                if (customers.CustID != null)
+                {
+                    result = obj.Delete(customers.CustID);
+                }
+                if (result)
+                {
+                    //var json = JsonConvert.SerializeObject(dtResultSet, Formatting.None);
+                    //var ReturnResult = JsonConvert.DeserializeObject<List<mCity>>(json);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+
+            }
+        }
+
+
+
 
         #endregion
 
         #region  Delete
+        public bool BODeleteCustomer(long CustID)
+        {
+            try
+            {
+                bool result = false;
+                DOCustomer obj = new DOCustomer();
+                if (CustID != null)
+                {
+                    result = obj.Delete(CustID);
+                }
+                if (result)
+                {
+                    //var json = JsonConvert.SerializeObject(dtResultSet, Formatting.None);
+                    //var ReturnResult = JsonConvert.DeserializeObject<List<mCity>>(json);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+
+            }
+        }
 
         #endregion
     }

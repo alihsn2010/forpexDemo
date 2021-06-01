@@ -75,4 +75,13 @@ namespace Fopex.COMMON.Helper
        
     }
 
+    public static class PageAction
+    {
+        public const string Create = "Create";
+        public const string Edit = "Edit";
+        public const string View = "View";
+        public const string ReadOnly = "ReadOnly";
+
+    }
+
 }

@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<Fopex.DAL.Model.Customer.mCustomer>
 
+
+
+
+
 @{
     ViewBag.Title = "Index";
 }
@@ -9,7 +13,7 @@
 <div class="card text-center justify-content-center shadow-lg p-0 bg-light rounded position-static">
     <div class="row">
         <div class="card-header col-lg-5">
-            
+
         </div>
 
         <div class="card-header col-lg-3">
@@ -22,10 +26,10 @@
         </div>
         <div class="card-header col-lg-4 text-right">
 
-            
+
             <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Create","Customer")'">New Customer</button>
-            
-            
+
+
         </div>
 
     </div>
@@ -96,10 +100,11 @@
                 <input class="custom-control-input" />
             </td>
             <td>
-                @Html.ActionLink("Edit Customer", "Edit", new { id = item.Customer_ID }) |
-                @Html.ActionLink("Customer Details", "Details", new { id = item.Customer_ID }) |
-                @Html.ActionLink("Delete Customer", "Delete", new { id = item.Customer_ID })
-               
+            
+                @Html.ActionLink("Edit", "Edit", new { CustID = item.CustID, objAction = "View"},null) |
+                @*@Html.ActionLink("View", "View", new { CustID = item.CustID }) |*@
+                @Html.ActionLink("Delete", "Delete", new { CustID = item.CustID })
+
             </td>
         </tr>
     }
@@ -121,38 +126,38 @@
 
 
     @*<script type="text/javascript">
-        $(document).ready(function () {
-            $('#myTable').DataTable({
+            $(document).ready(function () {
+                $('#myTable').DataTable({
 
-                "ajax": {
-                    "url": "/Customer/Index",
-                    "type": "GET",
-                    "datatype": "json"
-                },
-                "columns": [
-                    { "data": "A" },
-                    { "data": "B)" },
-                    { "data": "Balance" },
-                    { "data": "Action" }
-                ]
+                    "ajax": {
+                        "url": "/Customer/Index",
+                        "type": "GET",
+                        "datatype": "json"
+                    },
+                    "columns": [
+                        { "data": "A" },
+                        { "data": "B)" },
+                        { "data": "Balance" },
+                        { "data": "Action" }
+                    ]
+                });
             });
-        });
 
-    </script>
-    <script type="text/javascript">
+        </script>
+        <script type="text/javascript">
 
-        var test = prompt("Enter your name", "");
-        document.write("Hello" + test);
-            
-        
+            var test = prompt("Enter your name", "");
+            document.write("Hello" + test);
 
-        
 
-    </script>*@
+
+
+
+        </script>*@
 
     @*<form>
-        <a class="btn btn-primary" onclick="test()"></a>
-    </form>*@
+            <a class="btn btn-primary" onclick="test()"></a>
+        </form>*@
 
 }
 

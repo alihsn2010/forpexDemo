@@ -46,6 +46,12 @@ namespace Fopex.DAL.dbxEntities
         public string Secondary_Shipment_From_Location { get; set; }
         public Nullable<int> Assigned_SupervisorID { get; set; }
         public Nullable<int> Assigned_SalespersonID { get; set; }
+        public Nullable<int> UpdatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedOn { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
     
         public virtual City City1 { get; set; }
     }

@@ -49,44 +49,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="FopexModel.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="Assigned_SalespersonID" ColumnName="Assigned_SalespersonID" />
-          <ScalarProperty Name="Assigned_SupervisorID" ColumnName="Assigned_SupervisorID" />
-          <ScalarProperty Name="Secondary_Shipment_From_Location" ColumnName="Secondary_Shipment_From_Location" />
-          <ScalarProperty Name="Primary_Shipment_From_Location" ColumnName="Primary_Shipment_From_Location" />
-          <ScalarProperty Name="Secondary_Shipment_To_Location" ColumnName="Secondary_Shipment_To_Location" />
-          <ScalarProperty Name="Primary_Shipment_To_Location" ColumnName="Primary_Shipment_To_Location" />
-          <ScalarProperty Name="Exclude_From_Aging_Report" ColumnName="Exclude_From_Aging_Report" />
-          <ScalarProperty Name="Payment_Method" ColumnName="Payment_Method" />
-          <ScalarProperty Name="Payment_Term" ColumnName="Payment_Term" />
-          <ScalarProperty Name="Bill_To_Customer_Name" ColumnName="Bill_To_Customer_Name" />
-          <ScalarProperty Name="GLN" ColumnName="GLN" />
-          <ScalarProperty Name="EORI_Number" ColumnName="EORI_Number" />
-          <ScalarProperty Name="VAT_Registration_No" ColumnName="VAT_Registration_No" />
-          <ScalarProperty Name="Invoicing_Currency" ColumnName="Invoicing_Currency" />
-          <ScalarProperty Name="Sales_Region" ColumnName="Sales_Region" />
-          <ScalarProperty Name="Payment_Type_Group_ID" ColumnName="Payment_Type_Group_ID" />
-          <ScalarProperty Name="Customer_Sales_Type_ID" ColumnName="Customer_Sales_Type_ID" />
-          <ScalarProperty Name="Customer_GroupID" ColumnName="Customer_GroupID" />
-          <ScalarProperty Name="Customer_TypeID" ColumnName="Customer_TypeID" />
-          <ScalarProperty Name="Additional_Notes" ColumnName="Additional_Notes" />
-          <ScalarProperty Name="Region" ColumnName="Region" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-          <ScalarProperty Name="AddessLine1" ColumnName="AddessLine1" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
-          <ScalarProperty Name="Contact_Person_Name" ColumnName="Contact_Person_Name" />
-          <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
-          <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
-          <ScalarProperty Name="CustID" ColumnName="CustID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Customer_Type">
       <EntityTypeMapping TypeName="FopexModel.Customer_Type">
         <MappingFragment StoreEntitySet="Customer_Type">
@@ -395,6 +357,50 @@
           <ScalarProperty Name="Region_Code" ColumnName="Region_Code" />
           <ScalarProperty Name="Region_Name" ColumnName="Region_Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="FopexModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="Assigned_SalespersonID" ColumnName="Assigned_SalespersonID" />
+          <ScalarProperty Name="Assigned_SupervisorID" ColumnName="Assigned_SupervisorID" />
+          <ScalarProperty Name="Secondary_Shipment_From_Location" ColumnName="Secondary_Shipment_From_Location" />
+          <ScalarProperty Name="Primary_Shipment_From_Location" ColumnName="Primary_Shipment_From_Location" />
+          <ScalarProperty Name="Secondary_Shipment_To_Location" ColumnName="Secondary_Shipment_To_Location" />
+          <ScalarProperty Name="Primary_Shipment_To_Location" ColumnName="Primary_Shipment_To_Location" />
+          <ScalarProperty Name="Exclude_From_Aging_Report" ColumnName="Exclude_From_Aging_Report" />
+          <ScalarProperty Name="Payment_Method" ColumnName="Payment_Method" />
+          <ScalarProperty Name="Payment_Term" ColumnName="Payment_Term" />
+          <ScalarProperty Name="Bill_To_Customer_Name" ColumnName="Bill_To_Customer_Name" />
+          <ScalarProperty Name="GLN" ColumnName="GLN" />
+          <ScalarProperty Name="EORI_Number" ColumnName="EORI_Number" />
+          <ScalarProperty Name="VAT_Registration_No" ColumnName="VAT_Registration_No" />
+          <ScalarProperty Name="Invoicing_Currency" ColumnName="Invoicing_Currency" />
+          <ScalarProperty Name="Sales_Region" ColumnName="Sales_Region" />
+          <ScalarProperty Name="Payment_Type_Group_ID" ColumnName="Payment_Type_Group_ID" />
+          <ScalarProperty Name="Customer_Sales_Type_ID" ColumnName="Customer_Sales_Type_ID" />
+          <ScalarProperty Name="Customer_GroupID" ColumnName="Customer_GroupID" />
+          <ScalarProperty Name="Customer_TypeID" ColumnName="Customer_TypeID" />
+          <ScalarProperty Name="Additional_Notes" ColumnName="Additional_Notes" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+          <ScalarProperty Name="AddessLine1" ColumnName="AddessLine1" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
+          <ScalarProperty Name="Contact_Person_Name" ColumnName="Contact_Person_Name" />
+          <ScalarProperty Name="Customer_Name" ColumnName="Customer_Name" />
+          <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+          <ScalarProperty Name="CustID" ColumnName="CustID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
